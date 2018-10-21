@@ -46,7 +46,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Gbb-dh-HPs">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Gbb-dh-HPs" customClass="TimedForecastCellView" customModule="Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="59" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -69,6 +69,10 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <connections>
+                                            <outlet property="temperatureLabel" destination="wYG-7q-g6B" id="diA-52-uOl"/>
+                                            <outlet property="timeLabel" destination="tS8-pq-3OZ" id="jJ7-vv-O5A"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -88,7 +92,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sXZ-1l-psI">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sXZ-1l-psI" customClass="WeekForecastCellView" customModule="Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -118,6 +122,11 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <connections>
+                                            <outlet property="temperatureAtMiddayLabel" destination="XeP-bc-cqf" id="OI6-Do-ivZ"/>
+                                            <outlet property="temperatureAtNightLabel" destination="Uqa-Et-dji" id="ke0-gc-qGC"/>
+                                            <outlet property="weekDayNameLabel" destination="b26-r8-PYm" id="07r-IP-28f"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

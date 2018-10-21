@@ -12,6 +12,10 @@
 		D615BD36217D11BA00447A0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D615BD34217D11BA00447A0D /* Main.storyboard */; };
 		D615BD38217D11BC00447A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D615BD37217D11BC00447A0D /* Assets.xcassets */; };
 		D615BD3B217D11BC00447A0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D615BD39217D11BC00447A0D /* LaunchScreen.storyboard */; };
+		D615BD46217D1A9600447A0D /* TimedForecastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD45217D1A9600447A0D /* TimedForecastCellView.swift */; };
+		D615BD48217D1ABA00447A0D /* WeekForecastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD47217D1ABA00447A0D /* WeekForecastCellView.swift */; };
+		D615BD4A217D1BC300447A0D /* WeekdayForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD49217D1BC300447A0D /* WeekdayForecast.swift */; };
+		D615BD4C217D1D1500447A0D /* TimedForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD4B217D1D1500447A0D /* TimedForecast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		D615BD37217D11BC00447A0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D615BD3A217D11BC00447A0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D615BD3C217D11BC00447A0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D615BD45217D1A9600447A0D /* TimedForecastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastCellView.swift; sourceTree = "<group>"; };
+		D615BD47217D1ABA00447A0D /* WeekForecastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCellView.swift; sourceTree = "<group>"; };
+		D615BD49217D1BC300447A0D /* WeekdayForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayForecast.swift; sourceTree = "<group>"; };
+		D615BD4B217D1D1500447A0D /* TimedForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +77,8 @@
 		D615BD42217D19A600447A0D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D615BD49217D1BC300447A0D /* WeekdayForecast.swift */,
+				D615BD4B217D1D1500447A0D /* TimedForecast.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -77,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				D615BD32217D11BA00447A0D /* ViewController.swift */,
+				D615BD45217D1A9600447A0D /* TimedForecastCellView.swift */,
+				D615BD47217D1ABA00447A0D /* WeekForecastCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -159,8 +171,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D615BD4C217D1D1500447A0D /* TimedForecast.swift in Sources */,
+				D615BD4A217D1BC300447A0D /* WeekdayForecast.swift in Sources */,
+				D615BD46217D1A9600447A0D /* TimedForecastCellView.swift in Sources */,
 				D615BD33217D11BA00447A0D /* ViewController.swift in Sources */,
 				D615BD31217D11BA00447A0D /* AppDelegate.swift in Sources */,
+				D615BD48217D1ABA00447A0D /* WeekForecastCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
