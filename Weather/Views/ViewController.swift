@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController {
     @IBOutlet weak var timedForecastView: UICollectionView!
     @IBOutlet weak var weekForecastView: UICollectionView!
     
@@ -20,12 +20,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         timedForecastPresenter = TimedForecastPresenterImplementation()
         weekForecastPresenter = WeekForecastPresenterImplementation()
         
-        timedForecastView.delegate = self
-        timedForecastView.dataSource = self
-        
-        weekForecastView.delegate = self
-        weekForecastView.dataSource = self
-        
         // Hardcode
         for index in 1...5 {
             let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
@@ -35,8 +29,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             weekForecastPresenter!.addItem(weekForecast)
         }
         
+        timedForecastView.dataSource = self
+        weekForecastView.dataSource = self
     }
+}
 
+extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.timedForecastView {
             return timedForecastPresenter!.count
@@ -74,5 +72,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = UICollectionViewCell()
         return cell
     }
+    
+    
 }
 
