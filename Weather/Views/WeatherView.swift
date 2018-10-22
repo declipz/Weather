@@ -15,6 +15,8 @@ class WeatherView: UIView {
     let cityLabel = UILabel()
     let forecastStatusLabel = UILabel()
     let currentTemperatureLabel = UILabel()
+    var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
+    let timedForecastLayout = UICollectionViewFlowLayout.init()
     /*
     let timedForecastView = UICollectionView()
     let weekForecastView = UICollectionView()
@@ -51,28 +53,15 @@ class WeatherView: UIView {
         currentTemperatureLabel.textColor = UIColor.white
         addSubview(currentTemperatureLabel)
         presenter?.activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
-        /*
-        timedForecastView.translatesAutoresizingMaskIntoConstraints = false
-        let timedForecastLayout = UICollectionViewFlowLayout()
+        
+        timedForecastLayout.scrollDirection = .horizontal
         timedForecastLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        timedForecastLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 60)
-        timedForecastView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
-        timedForecastView.collectionViewLayout = timedForecastLayout
-        timedForecastView.backgroundColor = UIColor.white
+        timedForecastLayout.itemSize = CGSize(width: 60, height: 70)
+        let timedForecastFrame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 80)
+        timedForecastView = UICollectionView(frame: timedForecastFrame, collectionViewLayout: timedForecastLayout)
+        timedForecastView.backgroundColor = UIColor.clear
         addSubview(timedForecastView)
-        presenter?.activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
-        
-        weekForecastView.translatesAutoresizingMaskIntoConstraints = false
-        let weekForecastLayout = UICollectionViewFlowLayout()
-        weekForecastLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        weekForecastLayout.itemSize = CGSize(width: 75, height: 60)
-        weekForecastView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 80)
-        weekForecastView.collectionViewLayout = weekForecastLayout
-        weekForecastView.backgroundColor = UIColor.white
-        addSubview(weekForecastView)
-        presenter?.activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
- */
-        
+        presenter?.activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -19,27 +19,32 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let weatherView = WeatherView()
         self.timedForecastPresenter = TimedForecastPresenterImplementation()
         self.weekForecastPresenter = WeekForecastPresenterImplementation()
-        /*
+        
+        for index in 1...10 {
+            let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
+            let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
+            
+            timedForecastPresenter!.addItem(timedForecast)
+            weekForecastPresenter!.addItem(weekForecast)
+        }
+        
         weatherView.timedForecastView.dataSource = self
-        weatherView.weekForecastView.dataSource = self
+        weatherView.timedForecastView.delegate = self
         weatherView.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
-        weatherView.weekForecastView.register(WeekForecastCellView.self, forCellWithReuseIdentifier: "weekForecastCell")
-        */
+
         self.view = weatherView
     }
 }
-/*
-extension WeatherViewController: UICollectionViewDataSource {
+
+extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let view = self.view as! WeatherView
         if collectionView == view.timedForecastView {
             return timedForecastPresenter!.count
-        }
-        if collectionView == view.weekForecastView {
-            return weekForecastPresenter!.count
         }
         // Default value
         return 0
@@ -55,24 +60,8 @@ extension WeatherViewController: UICollectionViewDataSource {
             
             let item = timedForecastPresenter!.getItem(at: indexPath.row)
             
-            cell.updateTimeLabel(text: item.getTime())
-            cell.updateTemperatureLabel(text: item.getTemperature())
-            
-            return cell
-        }
-        if collectionView == view.weekForecastView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekForecastCell", for: indexPath) as! WeekForecastCellView
-            
-            weekForecastPresenter!.activateWeekdayLabelConstraints(view: cell.weekDayNameLabel)
-            weekForecastPresenter!.activateTemperatureAtNightLabelConstraints(view: cell.temperatureAtNightLabel)
-            weekForecastPresenter!.activateTemperatureAtMiddayLabelConstraints(view: cell.temperatureAtMiddayLabel, anchorView: cell.temperatureAtNightLabel)
-            
-            let item = weekForecastPresenter!.getItem(at: indexPath.row)
-            
-            cell.updateWeekDayNameLabel(text: item.getName())
-            cell.updateTemperatureAtNightLabel(text: item.getTemperatureAtNight())
-            cell.updateTemperatureAtMiddayLabel(text: item.getTemperatureAtMidday())
-            
+            cell.configure(time: item.getTime(), temperature: item.getTemperature())
+
             return cell
         }
         // Default value
@@ -80,4 +69,4 @@ extension WeatherViewController: UICollectionViewDataSource {
         return cell
     }
 }
- */
+

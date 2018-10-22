@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimedForecastCellView: UICollectionViewCell{
+class TimedForecastCellView: UICollectionViewCell {
     let timeLabel = UILabel()
     let temperatureLabel = UILabel()
     
@@ -18,5 +18,12 @@ class TimedForecastCellView: UICollectionViewCell{
     
     func updateTemperatureLabel(text: Int) {
         self.temperatureLabel.text = String(text)
+    }
+    
+    func configure(time: String, temperature: Int) {
+        self.timeLabel.textColor = UIColor.white
+        self.timeLabel.text = time
+        self.temperatureLabel.textColor = UIColor.white
+        self.temperatureLabel.text = String(temperature)
     }
 }
