@@ -18,9 +18,9 @@ class TimedForecast {
     }
     
     func getTime() -> String {
-        return self.time
+        return time
     }
     func getTemperature() -> Int {
-        return self.temperature
+        return temperature
     }
 }

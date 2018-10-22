@@ -20,12 +20,12 @@ class WeekdayForecast {
     }
     
     func getName() -> String {
-        return self.weekdayName
+        return weekdayName
     }
     func getTemperatureAtMidday() -> Int {
-        return self.temperatureAtMidday
+        return temperatureAtMidday
     }
     func getTemperatureAtNight() -> Int {
-        return self.temperatureAtNight
+        return temperatureAtNight
     }
 }

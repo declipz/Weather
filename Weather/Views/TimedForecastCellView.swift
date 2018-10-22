@@ -9,27 +9,21 @@
 import UIKit
 
 class TimedForecastCellView: UICollectionViewCell {
-    let timeLabel = UILabel()
-    let temperatureLabel = UILabel()
-    
-    var presenter: TimedForecastPresenter?
+    private let timeLabel = UILabel()
+    private let temperatureLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        presenter = TimedForecastPresenterImplementation()
-        
         timeLabel.text = "2 AM"
-        timeLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.textColor = UIColor.white
+        timeLabel.font = .boldSystemFont(ofSize: 17)
+        timeLabel.textColor = .white
         addSubview(timeLabel)
         activateTimeLabelConstraints(view: timeLabel)
         
         temperatureLabel.text = "2°"
-        temperatureLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
-        temperatureLabel.textColor = UIColor.white
+        temperatureLabel.font = .boldSystemFont(ofSize: 17)
+        temperatureLabel.textColor = .white
         addSubview(temperatureLabel)
         activateTemperatureLabelConstraints(view: temperatureLabel)
     }
@@ -39,27 +33,26 @@ class TimedForecastCellView: UICollectionViewCell {
     }
     
     func updateTimeLabel(text: String) {
-        self.timeLabel.text = text
+        timeLabel.text = text
     }
     
     func updateTemperatureLabel(text: Int) {
-        self.temperatureLabel.text = String(text)
+        temperatureLabel.text = String(text)
     }
     
-    func configure(time: String, temperature: Int) {
-        self.timeLabel.textColor = UIColor.white
-        self.timeLabel.text = time
-        self.temperatureLabel.textColor = UIColor.white
-        self.temperatureLabel.text = String(temperature)
+    func display(time: String, temperature: Int) {
+        timeLabel.textColor = .white
+        timeLabel.text = time
+        temperatureLabel.textColor = .white
+        temperatureLabel.text = String(temperature) + "°"
     }
 }
 
 private typealias PrivateTimedForecastCellView = TimedForecastCellView
 private extension PrivateTimedForecastCellView {
     func activateTimeLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: superview.topAnchor),
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
@@ -67,9 +60,8 @@ private extension PrivateTimedForecastCellView {
     }
     
     func activateTemperatureLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor)

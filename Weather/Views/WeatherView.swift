@@ -11,14 +11,14 @@ import UIKit
 class WeatherView: UIView {
     var presenter: WeatherPresenter?
     
-    let backgroundImage = UIImageView()
-    let cityLabel = UILabel()
-    let forecastStatusLabel = UILabel()
-    let currentTemperatureLabel = UILabel()
+    private let backgroundImage = UIImageView()
+    private let cityLabel = UILabel()
+    private let forecastStatusLabel = UILabel()
+    private let currentTemperatureLabel = UILabel()
     var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    let timedForecastLayout = UICollectionViewFlowLayout.init()
+    private let timedForecastLayout = UICollectionViewFlowLayout.init()
     var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    let weekForecastLayout = UICollectionViewFlowLayout.init()
+    private let weekForecastLayout = UICollectionViewFlowLayout.init()
     
     
     init() {
@@ -27,28 +27,24 @@ class WeatherView: UIView {
         presenter = WeatherPresenterImplementation(view: self)
         
         backgroundImage.image = UIImage(named: "background")
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundImage)
         activateBackgroundConstraints(view: backgroundImage)
         
         cityLabel.text = "Minsk"
-        cityLabel.font = UIFont.boldSystemFont(ofSize: 34)
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.textColor = UIColor.white
+        cityLabel.font = .boldSystemFont(ofSize: 34)
+        cityLabel.textColor = .white
         addSubview(cityLabel)
         activateCityLabelConstraints(view: cityLabel)
         
         forecastStatusLabel.text = "Partly cloudly"
-        forecastStatusLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        forecastStatusLabel.translatesAutoresizingMaskIntoConstraints = false
-        forecastStatusLabel.textColor = UIColor.white
+        forecastStatusLabel.font = .boldSystemFont(ofSize: 17)
+        forecastStatusLabel.textColor = .white
         addSubview(forecastStatusLabel)
         activateForecastStatusLabelConstraints(view: forecastStatusLabel, anchorView: cityLabel)
         
-        currentTemperatureLabel.text = "2"
-        currentTemperatureLabel.font = UIFont.boldSystemFont(ofSize: 54)
-        currentTemperatureLabel.translatesAutoresizingMaskIntoConstraints = false
-        currentTemperatureLabel.textColor = UIColor.white
+        currentTemperatureLabel.text = "2°"
+        currentTemperatureLabel.font = .boldSystemFont(ofSize: 54)
+        currentTemperatureLabel.textColor = .white
         addSubview(currentTemperatureLabel)
         activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
         
@@ -66,7 +62,7 @@ class WeatherView: UIView {
         weekForecastLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 70)
         let weekForecastFrame = CGRect(x: 0, y: 300, width: UIScreen.main.bounds.width, height: 380)
         weekForecastView = UICollectionView(frame: weekForecastFrame, collectionViewLayout: weekForecastLayout)
-        weekForecastView.backgroundColor = UIColor.clear
+        weekForecastView.backgroundColor = .clear
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
     }
@@ -79,9 +75,8 @@ class WeatherView: UIView {
 private typealias PrivateWeatherView = WeatherView
 private extension PrivateWeatherView {
     func activateBackgroundConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
@@ -91,9 +86,8 @@ private extension PrivateWeatherView {
     }
     
     func activateCityLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 40)
@@ -101,9 +95,8 @@ private extension PrivateWeatherView {
     }
     
     func activateForecastStatusLabelConstraints(view: UIView, anchorView: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 10)
@@ -111,9 +104,8 @@ private extension PrivateWeatherView {
     }
     
     func activateCurrentTemperatureLabelConstraints(view: UIView, anchorView: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 10)
@@ -121,9 +113,7 @@ private extension PrivateWeatherView {
     }
     
     func activateTimedForecastViewConstraints(view: UIView, anchorView: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 20)
@@ -131,9 +121,7 @@ private extension PrivateWeatherView {
     }
     
     func activateWeekForecastViewConstraints(view: UIView, anchorView: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 5)

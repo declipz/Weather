@@ -21,8 +21,8 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         
         let weatherView = WeatherView()
-        self.timedForecastPresenter = TimedForecastPresenterImplementation()
-        self.weekForecastPresenter = WeekForecastPresenterImplementation()
+        timedForecastPresenter = TimedForecastPresenterImplementation()
+        weekForecastPresenter = WeekForecastPresenterImplementation()
         
         weatherView.timedForecastView.dataSource = self
         weatherView.timedForecastView.delegate = self
@@ -56,7 +56,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
             
             let item = timedForecastPresenter!.getItem(at: indexPath.row)
             
-            cell.configure(time: item.getTime(), temperature: item.getTemperature())
+            cell.display(time: item.getTime(), temperature: item.getTemperature())
 
             return cell
         }
@@ -65,7 +65,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
             
             let item = weekForecastPresenter!.getItem(at: indexPath.row)
             
-            cell.configure(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
+            cell.display(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
             
             return cell
         }

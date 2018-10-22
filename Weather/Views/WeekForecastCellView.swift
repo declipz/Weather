@@ -9,35 +9,28 @@
 import UIKit
 
 class WeekForecastCellView: UICollectionViewCell {
-    var weekDayNameLabel = UILabel()
-    var temperatureAtMiddayLabel = UILabel()
-    var temperatureAtNightLabel = UILabel()
-    
-    var presenter: WeekForecastPresenter?
+    private var weekDayNameLabel = UILabel()
+    private var temperatureAtMiddayLabel = UILabel()
+    private var temperatureAtNightLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        presenter = WeekForecastPresenterImplementation()
-        
         weekDayNameLabel.text = "Monday"
-        weekDayNameLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        weekDayNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        weekDayNameLabel.textColor = UIColor.white
+        weekDayNameLabel.font = .boldSystemFont(ofSize: 17)
+        weekDayNameLabel.textColor = .white
         addSubview(weekDayNameLabel)
         activateWeekdayLabelConstraints(view: weekDayNameLabel)
         
         temperatureAtNightLabel.text = "2"
-        temperatureAtNightLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        temperatureAtNightLabel.translatesAutoresizingMaskIntoConstraints = false
-        temperatureAtNightLabel.textColor = UIColor.white
+        temperatureAtNightLabel.font = .boldSystemFont(ofSize: 17)
+        temperatureAtNightLabel.textColor = .white
         addSubview(temperatureAtNightLabel)
         activateTemperatureAtNightLabelConstraints(view: temperatureAtNightLabel)
         
         temperatureAtMiddayLabel.text = "10"
-        temperatureAtMiddayLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        temperatureAtMiddayLabel.translatesAutoresizingMaskIntoConstraints = false
-        temperatureAtMiddayLabel.textColor = UIColor.white
+        temperatureAtMiddayLabel.font = .boldSystemFont(ofSize: 17)
+        temperatureAtMiddayLabel.textColor = .white
         addSubview(temperatureAtMiddayLabel)
         activateTemperatureAtMiddayLabelConstraints(view: temperatureAtMiddayLabel, anchorView: temperatureAtNightLabel)
     }
@@ -56,22 +49,21 @@ class WeekForecastCellView: UICollectionViewCell {
         temperatureAtNightLabel.text = String(text)
     }
     
-    func configure(weekDay: String, temperatureAtMidday: Int, temperatureAtNight: Int) {
-        self.weekDayNameLabel.textColor = UIColor.white
-        self.weekDayNameLabel.text = weekDay
-        self.temperatureAtMiddayLabel.textColor = UIColor.white
-        self.temperatureAtMiddayLabel.text = String(temperatureAtMidday)
-        self.temperatureAtNightLabel.textColor = UIColor.lightGray
-        self.temperatureAtNightLabel.text = String(temperatureAtNight)
+    func display(weekDay: String, temperatureAtMidday: Int, temperatureAtNight: Int) {
+        weekDayNameLabel.textColor = .white
+        weekDayNameLabel.text = weekDay
+        temperatureAtMiddayLabel.textColor = .white
+        temperatureAtMiddayLabel.text = String(temperatureAtMidday) + "°"
+        temperatureAtNightLabel.textColor = .lightGray
+        temperatureAtNightLabel.text = String(temperatureAtNight) + "°"
     }
 }
 
 private typealias PrivateWeekForecastCellView = WeekForecastCellView
 private extension PrivateWeekForecastCellView {
     func activateWeekdayLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.leftAnchor.constraint(equalTo: superview.leftAnchor, constant: 10),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
@@ -79,9 +71,8 @@ private extension PrivateWeekForecastCellView {
     }
     
     func activateTemperatureAtNightLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.rightAnchor.constraint(equalTo: superview.rightAnchor, constant: -10),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
@@ -89,9 +80,8 @@ private extension PrivateWeekForecastCellView {
     }
     
     func activateTemperatureAtMiddayLabelConstraints(view: UIView, anchorView: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
+        guard let superview = view.superview else { return }
+        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             view.rightAnchor.constraint(equalTo: anchorView.leftAnchor, constant: -10),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
