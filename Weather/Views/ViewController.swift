@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     
     var weekForecastPresenter: WeekForecastPresenter?
     var timedForecastPresenter: TimedForecastPresenter?
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +25,7 @@ class ViewController: UIViewController {
         weekForecastPresenter = WeekForecastPresenterImplementation()
         
         // Hardcode
-        for index in 1...5 {
+        for index in 1...10 {
             let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
             let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
             
@@ -31,10 +35,11 @@ class ViewController: UIViewController {
         
         timedForecastView.dataSource = self
         weekForecastView.dataSource = self
+        
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.timedForecastView {
             return timedForecastPresenter!.count
@@ -72,7 +77,4 @@ extension ViewController: UICollectionViewDataSource {
         let cell = UICollectionViewCell()
         return cell
     }
-    
-    
 }
-
