@@ -24,14 +24,6 @@ class WeatherViewController: UIViewController {
         self.timedForecastPresenter = TimedForecastPresenterImplementation()
         self.weekForecastPresenter = WeekForecastPresenterImplementation()
         
-        for index in 1...10 {
-            let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
-            let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
-            
-            timedForecastPresenter!.addItem(timedForecast)
-            weekForecastPresenter!.addItem(weekForecast)
-        }
-        
         weatherView.timedForecastView.dataSource = self
         weatherView.timedForecastView.delegate = self
         weatherView.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")

@@ -61,7 +61,7 @@ class WeekForecastCellView: UICollectionViewCell {
         self.weekDayNameLabel.text = weekDay
         self.temperatureAtMiddayLabel.textColor = UIColor.white
         self.temperatureAtMiddayLabel.text = String(temperatureAtMidday)
-        self.temperatureAtNightLabel.textColor = UIColor.white
+        self.temperatureAtNightLabel.textColor = UIColor.lightGray
         self.temperatureAtNightLabel.text = String(temperatureAtNight)
     }
 }
@@ -83,7 +83,7 @@ private extension PrivateWeekForecastCellView {
             return
         }
         NSLayoutConstraint.activate([
-            view.rightAnchor.constraint(equalTo: superview.rightAnchor, constant: 10),
+            view.rightAnchor.constraint(equalTo: superview.rightAnchor, constant: -10),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
             ])
     }
@@ -93,7 +93,7 @@ private extension PrivateWeekForecastCellView {
             return
         }
         NSLayoutConstraint.activate([
-            view.rightAnchor.constraint(equalTo: anchorView.leftAnchor, constant: 10),
+            view.rightAnchor.constraint(equalTo: anchorView.leftAnchor, constant: -10),
             view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
             ])
     }
