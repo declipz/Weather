@@ -28,6 +28,4 @@ class TimedForecastPresenterImplementation: TimedForecastPresenter {
     func addItem(_ item: TimedForecast) {
         items.append(item)
     }
-    
-    
 }

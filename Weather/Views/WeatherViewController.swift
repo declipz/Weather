@@ -35,6 +35,10 @@ class WeatherViewController: UIViewController {
         weatherView.timedForecastView.dataSource = self
         weatherView.timedForecastView.delegate = self
         weatherView.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
+        
+        weatherView.weekForecastView.dataSource = self
+        weatherView.weekForecastView.delegate = self
+        weatherView.weekForecastView.register(WeekForecastCellView.self, forCellWithReuseIdentifier: "weekForecastCell")
 
         self.view = weatherView
     }
@@ -45,6 +49,9 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
         let view = self.view as! WeatherView
         if collectionView == view.timedForecastView {
             return timedForecastPresenter!.count
+        }
+        if collectionView == view.weekForecastView {
+            return weekForecastPresenter!.count
         }
         // Default value
         return 0
@@ -59,6 +66,15 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
             
             cell.configure(time: item.getTime(), temperature: item.getTemperature())
 
+            return cell
+        }
+        if collectionView == view.weekForecastView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekForecastCell", for: indexPath) as! WeekForecastCellView
+            
+            let item = weekForecastPresenter!.getItem(at: indexPath.row)
+            
+            cell.configure(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
+            
             return cell
         }
         // Default value

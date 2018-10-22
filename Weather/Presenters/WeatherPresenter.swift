@@ -18,8 +18,4 @@ class WeatherPresenterImplementation: WeatherPresenter {
     init(view: WeatherView) {
         self.view = view
     }
-    
-    
-    
-    
 }
