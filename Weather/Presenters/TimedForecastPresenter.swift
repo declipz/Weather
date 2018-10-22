@@ -9,7 +9,6 @@
 import UIKit
 
 protocol TimedForecastPresenter {
-    init()
     var count: Int { get }
     func getItem(at index: Int) -> TimedForecast
     func addItem(_ item: TimedForecast)

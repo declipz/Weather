@@ -9,7 +9,6 @@
 import UIKit
 
 protocol WeekForecastPresenter {
-    init()
     var count: Int { get }
     func getItem(at index: Int) -> WeekdayForecast
     func addItem(_ item: WeekdayForecast)
