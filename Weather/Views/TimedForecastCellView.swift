@@ -8,8 +8,16 @@
 
 import UIKit
 
-class TimedForecastCellView: UICollectionViewCell {
+class TimedForecastCellView: UICollectionViewCell{    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+
+    func updateTimeLabel(text: String) {
+        self.timeLabel.text = text
+    }
+    
+    func updateTemperatureLabel(text: Int) {
+        self.temperatureLabel.text = String(text)
+    }
     
 }

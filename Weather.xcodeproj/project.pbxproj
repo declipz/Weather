@@ -16,6 +16,8 @@
 		D615BD48217D1ABA00447A0D /* WeekForecastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD47217D1ABA00447A0D /* WeekForecastCellView.swift */; };
 		D615BD4A217D1BC300447A0D /* WeekdayForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD49217D1BC300447A0D /* WeekdayForecast.swift */; };
 		D615BD4C217D1D1500447A0D /* TimedForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD4B217D1D1500447A0D /* TimedForecast.swift */; };
+		D615BD4E217D1D9E00447A0D /* TimedForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615BD4D217D1D9E00447A0D /* TimedForecastPresenter.swift */; };
+		D6775869217DA87F00B30A5D /* WeekForecastPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6775868217DA87F00B30A5D /* WeekForecastPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		D615BD47217D1ABA00447A0D /* WeekForecastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCellView.swift; sourceTree = "<group>"; };
 		D615BD49217D1BC300447A0D /* WeekdayForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayForecast.swift; sourceTree = "<group>"; };
 		D615BD4B217D1D1500447A0D /* TimedForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecast.swift; sourceTree = "<group>"; };
+		D615BD4D217D1D9E00447A0D /* TimedForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastPresenter.swift; sourceTree = "<group>"; };
+		D6775868217DA87F00B30A5D /* WeekForecastPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 		D615BD44217D19B200447A0D /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				D615BD4D217D1D9E00447A0D /* TimedForecastPresenter.swift */,
+				D6775868217DA87F00B30A5D /* WeekForecastPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -171,6 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D615BD4E217D1D9E00447A0D /* TimedForecastPresenter.swift in Sources */,
+				D6775869217DA87F00B30A5D /* WeekForecastPresenter.swift in Sources */,
 				D615BD4C217D1D1500447A0D /* TimedForecast.swift in Sources */,
 				D615BD4A217D1BC300447A0D /* WeekdayForecast.swift in Sources */,
 				D615BD46217D1A9600447A0D /* TimedForecastCellView.swift in Sources */,
