@@ -12,8 +12,6 @@ protocol TimedForecastPresenter {
     var count: Int { get }
     func getItem(at index: Int) -> TimedForecast
     func addItem(_ item: TimedForecast)
-    func activateTimeLabelConstraints(view: UIView)
-    func activateTemperatureLabelConstraints(view: UIView)
 }
 
 class TimedForecastPresenterImplementation: TimedForecastPresenter {
@@ -31,23 +29,5 @@ class TimedForecastPresenterImplementation: TimedForecastPresenter {
         items.append(item)
     }
     
-    func activateTimeLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: superview.topAnchor),
-            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
-            ])
-    }
     
-    func activateTemperatureLabelConstraints(view: UIView) {
-        guard let superview = view.superview else {
-            return
-        }
-        NSLayoutConstraint.activate([
-            view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
-            view.centerYAnchor.constraint(equalTo: superview.centerYAnchor)
-            ])
-    }
 }

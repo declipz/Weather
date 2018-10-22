@@ -55,9 +55,6 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
         if collectionView == view.timedForecastView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timedForecastCell", for: indexPath) as! TimedForecastCellView
             
-            timedForecastPresenter!.activateTimeLabelConstraints(view: cell.timeLabel)
-            timedForecastPresenter!.activateTemperatureLabelConstraints(view: cell.temperatureLabel)
-            
             let item = timedForecastPresenter!.getItem(at: indexPath.row)
             
             cell.configure(time: item.getTime(), temperature: item.getTemperature())
