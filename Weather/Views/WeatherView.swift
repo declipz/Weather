@@ -22,10 +22,10 @@ final class WeatherView: UIView {
     private let cityLabel = UILabel()
     private let forecastStatusLabel = UILabel()
     private let currentTemperatureLabel = UILabel()
-    var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    private let timedForecastLayout = UICollectionViewFlowLayout.init()
-    var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    private let weekForecastLayout = UICollectionViewFlowLayout.init()
+    var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+    private let timedForecastLayout = UICollectionViewFlowLayout()
+    var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+    private let weekForecastLayout = UICollectionViewFlowLayout()
     
     
     init() {
