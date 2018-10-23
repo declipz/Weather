@@ -18,13 +18,13 @@ class TimedForecastCellView: UICollectionViewCell {
         timeLabel.text = "2 AM"
         timeLabel.font = .boldSystemFont(ofSize: 17)
         timeLabel.textColor = .white
-        addSubview(timeLabel)
+        contentView.addSubview(timeLabel)
         activateTimeLabelConstraints(view: timeLabel)
         
         temperatureLabel.text = "2°"
         temperatureLabel.font = .boldSystemFont(ofSize: 17)
         temperatureLabel.textColor = .white
-        addSubview(temperatureLabel)
+        contentView.addSubview(temperatureLabel)
         activateTemperatureLabelConstraints(view: temperatureLabel)
     }
     

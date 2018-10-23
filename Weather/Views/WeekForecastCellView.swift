@@ -19,19 +19,19 @@ class WeekForecastCellView: UICollectionViewCell {
         weekDayNameLabel.text = "Monday"
         weekDayNameLabel.font = .boldSystemFont(ofSize: 17)
         weekDayNameLabel.textColor = .white
-        addSubview(weekDayNameLabel)
+        contentView.addSubview(weekDayNameLabel)
         activateWeekdayLabelConstraints(view: weekDayNameLabel)
         
         temperatureAtNightLabel.text = "2"
         temperatureAtNightLabel.font = .boldSystemFont(ofSize: 17)
         temperatureAtNightLabel.textColor = .white
-        addSubview(temperatureAtNightLabel)
+        contentView.addSubview(temperatureAtNightLabel)
         activateTemperatureAtNightLabelConstraints(view: temperatureAtNightLabel)
         
         temperatureAtMiddayLabel.text = "10"
         temperatureAtMiddayLabel.font = .boldSystemFont(ofSize: 17)
         temperatureAtMiddayLabel.textColor = .white
-        addSubview(temperatureAtMiddayLabel)
+        contentView.addSubview(temperatureAtMiddayLabel)
         activateTemperatureAtMiddayLabelConstraints(view: temperatureAtMiddayLabel, anchorView: temperatureAtNightLabel)
     }
     
