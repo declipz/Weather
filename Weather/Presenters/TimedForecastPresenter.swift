@@ -12,14 +12,14 @@ protocol TimedForecastPresenter {
     var count: Int { get }
     func getItem(at index: Int) -> TimedForecast
     func addItem(_ item: TimedForecast)
-    func loadData()
+    func updateData()
 }
 
 class TimedForecastPresenterImplementation: TimedForecastPresenter {
     private var items: [TimedForecast] = []
     
     required init() {
-        self.loadData()
+        updateData()
     }
     
     var count: Int {
@@ -34,10 +34,11 @@ class TimedForecastPresenterImplementation: TimedForecastPresenter {
         items.append(item)
     }
     
-    func loadData() {
+    func updateData() {
+        items = []
         for index in 1...10 {
             let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
-            self.addItem(timedForecast)
+            addItem(timedForecast)
         }
     }
 }

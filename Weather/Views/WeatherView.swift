@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol WeatherDelegate {
+    func updateCityLabel(cityLabel: UILabel)
+    func updateForecastStatusLabel(forecastStatusLabel: UILabel)
+    func updateCurrentTemperature(currentTemperatureLabel: UILabel)
+}
+
 class WeatherView: UIView {
     var presenter: WeatherPresenter?
+    var delegate: WeatherDelegate?
     
     private let backgroundImage = UIImageView()
     private let cityLabel = UILabel()
@@ -30,19 +37,16 @@ class WeatherView: UIView {
         addSubview(backgroundImage)
         activateBackgroundConstraints(view: backgroundImage)
         
-        cityLabel.text = "Minsk"
         cityLabel.font = .boldSystemFont(ofSize: 34)
         cityLabel.textColor = .white
         addSubview(cityLabel)
         activateCityLabelConstraints(view: cityLabel)
         
-        forecastStatusLabel.text = "Partly cloudly"
         forecastStatusLabel.font = .boldSystemFont(ofSize: 17)
         forecastStatusLabel.textColor = .white
         addSubview(forecastStatusLabel)
         activateForecastStatusLabelConstraints(view: forecastStatusLabel, anchorView: cityLabel)
         
-        currentTemperatureLabel.text = "2°"
         currentTemperatureLabel.font = .boldSystemFont(ofSize: 54)
         currentTemperatureLabel.textColor = .white
         addSubview(currentTemperatureLabel)
@@ -65,6 +69,10 @@ class WeatherView: UIView {
         weekForecastView.backgroundColor = .clear
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
+        
+        delegate?.updateCityLabel(cityLabel: cityLabel)
+        delegate?.updateForecastStatusLabel(forecastStatusLabel: forecastStatusLabel)
+        delegate?.updateCurrentTemperature(currentTemperatureLabel: currentTemperatureLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {

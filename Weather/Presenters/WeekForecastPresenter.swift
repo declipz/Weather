@@ -12,14 +12,14 @@ protocol WeekForecastPresenter {
     var count: Int { get }
     func getItem(at index: Int) -> WeekdayForecast
     func addItem(_ item: WeekdayForecast)
-    func loadData()
+    func updateData()
 }
 
 class WeekForecastPresenterImplementation: WeekForecastPresenter {
     private var items: [WeekdayForecast] = []
     
     required init() {
-        self.loadData()
+        updateData()
     }
     
     var count: Int {
@@ -34,10 +34,11 @@ class WeekForecastPresenterImplementation: WeekForecastPresenter {
         items.append(item)
     }
     
-    func loadData() {
+    func updateData() {
+        items = []
         for index in 1...10 {
             let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
-            self.addItem(weekForecast)
+            addItem(weekForecast)
         }
     }
 }
