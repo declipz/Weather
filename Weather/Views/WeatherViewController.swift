@@ -40,10 +40,10 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let view = self.view as! WeatherView
         if collectionView == view.timedForecastView {
-            return timedForecastPresenter!.count
+            return timedForecastPresenter?.count ?? 0
         }
         if collectionView == view.weekForecastView {
-            return weekForecastPresenter!.count
+            return weekForecastPresenter?.count ?? 0
         }
         // Default value
         return 0
@@ -54,7 +54,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
         if collectionView == view.timedForecastView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timedForecastCell", for: indexPath) as! TimedForecastCellView
             
-            let item = timedForecastPresenter!.getItem(at: indexPath.row)
+            let item = timedForecastPresenter?.getItem(at: indexPath.row) ?? TimedForecast(at: "Day", is: 0)
             
             cell.display(time: item.getTime(), temperature: item.getTemperature())
 
@@ -63,7 +63,7 @@ extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDel
         if collectionView == view.weekForecastView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekForecastCell", for: indexPath) as! WeekForecastCellView
             
-            let item = weekForecastPresenter!.getItem(at: indexPath.row)
+            let item = weekForecastPresenter?.getItem(at: indexPath.row) ?? WeekdayForecast(on: "Day", temperatureAtMidday: 0, temperatureAtNight: 0)
             
             cell.display(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
             
