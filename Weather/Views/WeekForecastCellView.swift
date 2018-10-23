@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeekForecastCellView: UICollectionViewCell {
+final class WeekForecastCellView: UICollectionViewCell {
     private var weekDayNameLabel = UILabel()
     private var temperatureAtMiddayLabel = UILabel()
     private var temperatureAtNightLabel = UILabel()
@@ -58,7 +58,7 @@ class WeekForecastCellView: UICollectionViewCell {
 
 private typealias PrivateWeekForecastCellView = WeekForecastCellView
 private extension PrivateWeekForecastCellView {
-    func activateWeekdayLabelConstraints(view: UIView) {
+    final func activateWeekdayLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -67,7 +67,7 @@ private extension PrivateWeekForecastCellView {
             ])
     }
     
-    func activateTemperatureAtNightLabelConstraints(view: UIView) {
+    final func activateTemperatureAtNightLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -76,7 +76,7 @@ private extension PrivateWeekForecastCellView {
             ])
     }
     
-    func activateTemperatureAtMiddayLabelConstraints(view: UIView, anchorView: UIView) {
+    final func activateTemperatureAtMiddayLabelConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

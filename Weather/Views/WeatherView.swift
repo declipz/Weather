@@ -14,7 +14,7 @@ protocol WeatherDelegate {
     func updateCurrentTemperature(currentTemperatureLabel: UILabel)
 }
 
-class WeatherView: UIView {
+final class WeatherView: UIView {
     var presenter: WeatherPresenter?
     var delegate: WeatherDelegate?
     
@@ -82,7 +82,7 @@ class WeatherView: UIView {
 
 private typealias PrivateWeatherView = WeatherView
 private extension PrivateWeatherView {
-    func activateBackgroundConstraints(view: UIView) {
+    final func activateBackgroundConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -93,7 +93,7 @@ private extension PrivateWeatherView {
             ])
     }
     
-    func activateCityLabelConstraints(view: UIView) {
+    final func activateCityLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -102,7 +102,7 @@ private extension PrivateWeatherView {
             ])
     }
     
-    func activateForecastStatusLabelConstraints(view: UIView, anchorView: UIView) {
+    final func activateForecastStatusLabelConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -111,7 +111,7 @@ private extension PrivateWeatherView {
             ])
     }
     
-    func activateCurrentTemperatureLabelConstraints(view: UIView, anchorView: UIView) {
+    final func activateCurrentTemperatureLabelConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -120,7 +120,7 @@ private extension PrivateWeatherView {
             ])
     }
     
-    func activateTimedForecastViewConstraints(view: UIView, anchorView: UIView) {
+    final func activateTimedForecastViewConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
@@ -128,7 +128,7 @@ private extension PrivateWeatherView {
             ])
     }
     
-    func activateWeekForecastViewConstraints(view: UIView, anchorView: UIView) {
+    final func activateWeekForecastViewConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
