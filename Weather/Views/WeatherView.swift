@@ -8,15 +8,8 @@
 
 import UIKit
 
-protocol WeatherDelegate {
-    func updateCityLabel(cityLabel: UILabel)
-    func updateForecastStatusLabel(forecastStatusLabel: UILabel)
-    func updateCurrentTemperature(currentTemperatureLabel: UILabel)
-}
-
 final class WeatherView: UIView {
     var presenter: WeatherPresenter?
-    var delegate: WeatherDelegate?
     
     private let backgroundImage = UIImageView()
     private let cityLabel = UILabel()
@@ -57,7 +50,7 @@ final class WeatherView: UIView {
         timedForecastLayout.itemSize = CGSize(width: 60, height: 70)
         let timedForecastFrame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 90)
         timedForecastView = UICollectionView(frame: timedForecastFrame, collectionViewLayout: timedForecastLayout)
-        timedForecastView.backgroundColor = UIColor.clear
+        timedForecastView.backgroundColor = .clear
         addSubview(timedForecastView)
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         
@@ -70,9 +63,9 @@ final class WeatherView: UIView {
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
         
-        delegate?.updateCityLabel(cityLabel: cityLabel)
-        delegate?.updateForecastStatusLabel(forecastStatusLabel: forecastStatusLabel)
-        delegate?.updateCurrentTemperature(currentTemperatureLabel: currentTemperatureLabel)
+        presenter?.updateCityLabel(cityLabel: cityLabel)
+        presenter?.updateForecastStatusLabel(forecastStatusLabel: forecastStatusLabel)
+        presenter?.updateCurrentTemperature(currentTemperatureLabel: currentTemperatureLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -124,7 +117,9 @@ private extension PrivateWeatherView {
         guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
-            view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 20)
+            view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 20),
+            view.heightAnchor.constraint(equalToConstant: 90),
+            view.widthAnchor.constraint(equalTo: superview.widthAnchor)
             ])
     }
     
@@ -132,7 +127,9 @@ private extension PrivateWeatherView {
         guard let superview = view.superview else { return }
         NSLayoutConstraint.activate([
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
-            view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 5)
+            view.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: 5),
+            view.heightAnchor.constraint(equalToConstant: 350),
+            view.widthAnchor.constraint(equalTo: superview.widthAnchor)
             ])
     }
 }

@@ -10,6 +10,9 @@ import UIKit
 
 protocol WeatherPresenter {
     func updateData()
+    func updateCityLabel(cityLabel: UILabel)
+    func updateForecastStatusLabel(forecastStatusLabel: UILabel)
+    func updateCurrentTemperature(currentTemperatureLabel: UILabel)
 }
 
 class WeatherPresenterImplementation: WeatherPresenter {
@@ -20,7 +23,6 @@ class WeatherPresenterImplementation: WeatherPresenter {
     
     init(view: WeatherView) {
         self.view = view
-        view.delegate = self
         updateData()
     }
     
@@ -29,10 +31,7 @@ class WeatherPresenterImplementation: WeatherPresenter {
         forecastStatus = "Partly cloudly"
         currentTemperature = 2
     }
-}
-
-private typealias WeatherDelegateImplementation = WeatherPresenterImplementation
-extension WeatherDelegateImplementation: WeatherDelegate {
+    
     func updateCityLabel(cityLabel: UILabel) {
         cityLabel.text = currentCity
     }
