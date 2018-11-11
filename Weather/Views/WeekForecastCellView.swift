@@ -58,7 +58,7 @@ final class WeekForecastCellView: UICollectionViewCell {
 
 private typealias PrivateWeekForecastCellView = WeekForecastCellView
 private extension PrivateWeekForecastCellView {
-    final func activateWeekdayLabelConstraints(view: UIView) {
+    func activateWeekdayLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -67,7 +67,7 @@ private extension PrivateWeekForecastCellView {
             ])
     }
     
-    final func activateTemperatureAtNightLabelConstraints(view: UIView) {
+    func activateTemperatureAtNightLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -76,7 +76,7 @@ private extension PrivateWeekForecastCellView {
             ])
     }
     
-    final func activateTemperatureAtMiddayLabelConstraints(view: UIView, anchorView: UIView) {
+    func activateTemperatureAtMiddayLabelConstraints(view: UIView, anchorView: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
