@@ -47,6 +47,8 @@ final class WeatherView: UIView {
         timedForecastLayout.scrollDirection = .horizontal
         timedForecastView.collectionViewLayout = timedForecastLayout
         timedForecastView.backgroundColor = .clear
+        timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
+        
         addSubview(timedForecastView)
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         

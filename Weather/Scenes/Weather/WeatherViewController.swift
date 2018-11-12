@@ -24,9 +24,7 @@ final class WeatherViewController: UIViewController {
         timedForecastPresenter = TimedForecastPresenterImplementation()
         weekForecastPresenter = WeekForecastPresenterImplementation()
         
-        weatherView.timedForecastView.dataSource = self
-        weatherView.timedForecastView.delegate = self
-        weatherView.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
+        timedForecastPresenter?.configure(collectionView: weatherView.timedForecastView)
         
         weatherView.weekForecastView.dataSource = self
         weatherView.weekForecastView.delegate = self

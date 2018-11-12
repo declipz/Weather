@@ -13,29 +13,35 @@ protocol TimedForecastPresenter {
     func getItem(at index: Int) -> TimedForecast
     func addItem(_ item: TimedForecast)
     func updateData()
+    func configure(collectionView: UICollectionView)
 }
 
 class TimedForecastPresenterImplementation: TimedForecastPresenter {
-    private var items: [TimedForecast] = []
+    private var dataSource = TimedForecastDataSource()
     
     required init() {
         updateData()
     }
     
     var count: Int {
-        return items.count
+        return dataSource.count
     }
     
     func getItem(at index: Int) -> TimedForecast {
-        return items[index]
+        return dataSource.getItem(at: index)
     }
     
     func addItem(_ item: TimedForecast) {
-        items.append(item)
+        dataSource.addItem(item)
+    }
+    
+    func configure(collectionView: UICollectionView) {
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource // Not sure whether it's right or not
+        collectionView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
     }
     
     func updateData() {
-        items = []
         for index in 1...10 {
             let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
             addItem(timedForecast)

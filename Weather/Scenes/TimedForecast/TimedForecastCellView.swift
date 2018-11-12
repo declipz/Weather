@@ -46,6 +46,10 @@ final class TimedForecastCellView: UICollectionViewCell {
     }
 }
 
+extension TimedForecastCellView: UICollectionViewDelegateFlowLayout {
+    
+}
+
 private typealias PrivateTimedForecastCellView = TimedForecastCellView
 private extension PrivateTimedForecastCellView {
     func activateTimeLabelConstraints(view: UIView) {
