@@ -19,6 +19,7 @@
 		D677589A217E002F00B30A5D /* TimedForecastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6775899217E002F00B30A5D /* TimedForecastCellView.swift */; };
 		D677589C217E019C00B30A5D /* WeekForecastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D677589B217E019C00B30A5D /* WeekForecastCellView.swift */; };
 		D6E0C5112199E03600DBD822 /* TimedForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0C5102199E03600DBD822 /* TimedForecastDataSource.swift */; };
+		D6E0C5132199E64B00DBD822 /* WeekForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0C5122199E64B00DBD822 /* WeekForecastDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D6775899217E002F00B30A5D /* TimedForecastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastCellView.swift; sourceTree = "<group>"; };
 		D677589B217E019C00B30A5D /* WeekForecastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCellView.swift; sourceTree = "<group>"; };
 		D6E0C5102199E03600DBD822 /* TimedForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastDataSource.swift; sourceTree = "<group>"; };
+		D6E0C5122199E64B00DBD822 /* WeekForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				D6E0C5102199E03600DBD822 /* TimedForecastDataSource.swift */,
+				D6E0C5122199E64B00DBD822 /* WeekForecastDataSource.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				D6775890217DDEED00B30A5D /* WeatherPresenter.swift in Sources */,
 				D677589C217E019C00B30A5D /* WeekForecastCellView.swift in Sources */,
 				D6E0C5112199E03600DBD822 /* TimedForecastDataSource.swift in Sources */,
+				D6E0C5132199E64B00DBD822 /* WeekForecastDataSource.swift in Sources */,
 				D6775877217DDC2100B30A5D /* AppDelegate.swift in Sources */,
 				D677588C217DDD1A00B30A5D /* WeatherViewController.swift in Sources */,
 			);
