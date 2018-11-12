@@ -350,7 +350,7 @@
 		D6775886217DDC2600B30A5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WeatherAppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6D9VU6JV7P;
 				INFOPLIST_FILE = Weather/Info.plist;
@@ -369,7 +369,7 @@
 		D6775887217DDC2600B30A5D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = WeatherAppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6D9VU6JV7P;
 				INFOPLIST_FILE = Weather/Info.plist;
