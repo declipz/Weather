@@ -36,6 +36,20 @@ final class WeatherViewController: UIViewController {
     }
 }
 
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let view = self.view as? WeatherView
+        let width = view?.bounds.width ?? 0;
+        if collectionView == view?.timedForecastView {
+            return CGSize(width: 60, height: 90)
+        }
+        if collectionView == view?.weekForecastView {
+            return CGSize(width: width, height: 40)
+        }
+        return CGSize.zero
+    }
+}
+
 extension WeatherViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let view = self.view as? WeatherView

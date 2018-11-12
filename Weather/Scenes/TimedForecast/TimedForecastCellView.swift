@@ -14,7 +14,7 @@ final class TimedForecastCellView: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         timeLabel.font = .boldSystemFont(ofSize: 17)
         timeLabel.textColor = .white
         contentView.addSubview(timeLabel)
@@ -52,7 +52,7 @@ private extension PrivateTimedForecastCellView {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: superview.topAnchor),
+            view.topAnchor.constraint(equalTo: superview.topAnchor, constant: 10),
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
             ])
     }
@@ -61,7 +61,7 @@ private extension PrivateTimedForecastCellView {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            view.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
+            view.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -10),
             view.centerXAnchor.constraint(equalTo: superview.centerXAnchor)
             ])
     }
