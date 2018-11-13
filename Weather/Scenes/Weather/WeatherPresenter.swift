@@ -40,13 +40,13 @@ class WeatherPresenterImplementation: WeatherPresenter {
     func configureWeekForecastCollectionView(delegate: WeatherViewController) {
         view.weekForecastView.dataSource = weekForecastDataSource
         view.weekForecastView.delegate = delegate
-        view.weekForecastView.register(WeekForecastCellView.self, forCellWithReuseIdentifier: "weekForecastCell")
+        view.weekForecastView.register(WeekForecastCollectionViewCell.self, forCellWithReuseIdentifier: "weekForecastCell")
     }
     
     func configureTimedForecastCollectionView(delegate: WeatherViewController) {
         view.timedForecastView.dataSource = timedForecastDataSource
         view.timedForecastView.delegate = delegate
-        view.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
+        view.timedForecastView.register(TimedForecastCollectionViewCell.self, forCellWithReuseIdentifier: "timedForecastCell")
     }
     
     func updateData() {

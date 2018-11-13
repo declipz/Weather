@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class WeekForecastCellView: UICollectionViewCell {
+final class WeekForecastCollectionViewCell: UICollectionViewCell {
     private var weekDayNameLabel = UILabel()
     private var temperatureAtMiddayLabel = UILabel()
     private var temperatureAtNightLabel = UILabel()
@@ -56,7 +56,7 @@ final class WeekForecastCellView: UICollectionViewCell {
     }
 }
 
-private typealias PrivateWeekForecastCellView = WeekForecastCellView
+private typealias PrivateWeekForecastCellView = WeekForecastCollectionViewCell
 private extension PrivateWeekForecastCellView {
     func activateWeekdayLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }

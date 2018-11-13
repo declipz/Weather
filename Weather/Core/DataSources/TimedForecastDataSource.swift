@@ -29,7 +29,7 @@ class TimedForecastDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = retrieveItem(at: indexPath.row)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timedForecastCell", for: indexPath) as! TimedForecastCellView
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timedForecastCell", for: indexPath) as! TimedForecastCollectionViewCell
         cell.display(time: item.time, temperature: item.temperature)
         
         return cell

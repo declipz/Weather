@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TimedForecastCellView: UICollectionViewCell {
+final class TimedForecastCollectionViewCell: UICollectionViewCell {
     private let timeLabel = UILabel()
     private let temperatureLabel = UILabel()
     
@@ -46,11 +46,7 @@ final class TimedForecastCellView: UICollectionViewCell {
     }
 }
 
-extension TimedForecastCellView: UICollectionViewDelegateFlowLayout {
-    
-}
-
-private typealias PrivateTimedForecastCellView = TimedForecastCellView
+private typealias PrivateTimedForecastCellView = TimedForecastCollectionViewCell
 private extension PrivateTimedForecastCellView {
     func activateTimeLabelConstraints(view: UIView) {
         guard let superview = view.superview else { return }
