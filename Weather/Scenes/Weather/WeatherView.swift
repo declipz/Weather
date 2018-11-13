@@ -15,10 +15,11 @@ final class WeatherView: UIView {
     private let cityLabel = UILabel()
     private let forecastStatusLabel = UILabel()
     private let currentTemperatureLabel = UILabel()
-    var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
     private let timedForecastLayout = UICollectionViewFlowLayout()
-    var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
+    lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: timedForecastLayout)
     private let weekForecastLayout = UICollectionViewFlowLayout()
+    lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: weekForecastLayout)
+
     
     
     init() {
@@ -45,7 +46,6 @@ final class WeatherView: UIView {
         activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
         
         timedForecastLayout.scrollDirection = .horizontal
-        timedForecastView.collectionViewLayout = timedForecastLayout
         timedForecastView.backgroundColor = .clear
         timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
         
@@ -53,7 +53,6 @@ final class WeatherView: UIView {
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         
         weekForecastLayout.scrollDirection = .vertical
-        weekForecastView.collectionViewLayout = weekForecastLayout
         weekForecastView.backgroundColor = .clear
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
