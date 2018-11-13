@@ -14,21 +14,15 @@ final class WeatherViewController: UIViewController {
         return .lightContent
     }
     
-    var timedForecastPresenter: TimedForecastPresenter?
-    var weekForecastPresenter: WeekForecastPresenter?
-    var presenter: WeatherPresenter?
+    var presenter: WeatherPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let weatherView = WeatherView()
-        timedForecastPresenter = TimedForecastPresenterImplementation()
-        weekForecastPresenter = WeekForecastPresenterImplementation()
-        
-        timedForecastPresenter?.configure(collectionView: weatherView.timedForecastView)
-        weekForecastPresenter?.configure(collectionView: weatherView.weekForecastView)
-        
         presenter = WeatherPresenterImplementation(view: weatherView)
-        presenter?.viewDidLoad()
+        presenter.configureTimedForecastCollectionView()
+        presenter.configureWeekForecastCollectionView()
+        presenter.viewDidLoad()
         self.view = weatherView
     }
 }
