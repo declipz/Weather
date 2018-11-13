@@ -6,13 +6,14 @@
 //  Copyright © 2018 Vladislav Kondrashkov. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol WeatherPresenter {
+    func viewDidLoad()
     func updateData()
-    func updateCityLabel(cityLabel: UILabel)
-    func updateForecastStatusLabel(forecastStatusLabel: UILabel)
-    func updateCurrentTemperature(currentTemperatureLabel: UILabel)
+    func updateCityLabel()
+    func updateForecastStatusLabel()
+    func updateCurrentTemperature()
 }
 
 class WeatherPresenterImplementation: WeatherPresenter {
@@ -23,7 +24,13 @@ class WeatherPresenterImplementation: WeatherPresenter {
     
     init(view: WeatherView) {
         self.view = view
+    }
+    
+    func viewDidLoad() {
         updateData()
+        updateCityLabel()
+        updateForecastStatusLabel()
+        updateCurrentTemperature()
     }
     
     func updateData() {
@@ -32,15 +39,15 @@ class WeatherPresenterImplementation: WeatherPresenter {
         currentTemperature = 2
     }
     
-    func updateCityLabel(cityLabel: UILabel) {
-        cityLabel.text = currentCity
+    func updateCityLabel() {
+        view?.display(city: currentCity)
     }
     
-    func updateForecastStatusLabel(forecastStatusLabel: UILabel) {
-        forecastStatusLabel.text = forecastStatus
+    func updateForecastStatusLabel() {
+        view?.display(forecastStatus: forecastStatus)
     }
     
-    func updateCurrentTemperature(currentTemperatureLabel: UILabel) {
-        currentTemperatureLabel.text = String(currentTemperature ?? 0) + "°"
+    func updateCurrentTemperature() {
+        view?.display(currentTemperature: currentTemperature)
     }
 }

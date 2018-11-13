@@ -9,8 +9,6 @@
 import UIKit
 
 final class WeatherView: UIView {
-    var presenter: WeatherPresenter?
-    
     private let backgroundImage = UIImageView()
     private let cityLabel = UILabel()
     private let forecastStatusLabel = UILabel()
@@ -19,13 +17,9 @@ final class WeatherView: UIView {
     lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: timedForecastLayout)
     private let weekForecastLayout = UICollectionViewFlowLayout()
     lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: weekForecastLayout)
-
-    
     
     init() {
         super.init(frame: CGRect.zero)
-        presenter = WeatherPresenterImplementation(view: self)
-        
         backgroundImage.image = UIImage(named: "background")
         addSubview(backgroundImage)
         activateBackgroundConstraints(view: backgroundImage)
@@ -56,14 +50,23 @@ final class WeatherView: UIView {
         weekForecastView.backgroundColor = .clear
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
-        
-        presenter?.updateCityLabel(cityLabel: cityLabel)
-        presenter?.updateForecastStatusLabel(forecastStatusLabel: forecastStatusLabel)
-        presenter?.updateCurrentTemperature(currentTemperatureLabel: currentTemperatureLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func display(city: String?) {
+        cityLabel.text = city
+    }
+    
+    func display(forecastStatus: String?) {
+        forecastStatusLabel.text = forecastStatus
+    }
+    
+    func display(currentTemperature: Int?) {
+        guard let currentTemperature = currentTemperature else { return }
+        currentTemperatureLabel.text = String(currentTemperature) + "°"
     }
 }
 
