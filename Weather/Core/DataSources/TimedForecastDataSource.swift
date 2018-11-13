@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimedForecastDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class TimedForecastDataSource: NSObject, UICollectionViewDataSource {
     private var items: [TimedForecast] = []
     
     var numberOfForecasts: Int {
@@ -33,11 +33,5 @@ class TimedForecastDataSource: NSObject, UICollectionViewDataSource, UICollectio
         cell.display(time: item.getTime(), temperature: item.getTemperature())
         
         return cell
-    }
-}
-
-extension TimedForecastDataSource: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 90)
     }
 }

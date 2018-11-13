@@ -10,8 +10,8 @@ import Foundation
 
 protocol WeatherPresenter {
     func viewDidLoad()
-    func configureWeekForecastCollectionView()
-    func configureTimedForecastCollectionView()
+    func configureWeekForecastCollectionView(delegate: WeatherViewController)
+    func configureTimedForecastCollectionView(delegate: WeatherViewController)
     func updateData()
     func updateCityLabel()
     func updateForecastStatusLabel()
@@ -37,15 +37,15 @@ class WeatherPresenterImplementation: WeatherPresenter {
         updateCurrentTemperature()
     }
     
-    func configureWeekForecastCollectionView() {
+    func configureWeekForecastCollectionView(delegate: WeatherViewController) {
         view.weekForecastView.dataSource = weekForecastDataSource
-        view.weekForecastView.delegate = weekForecastDataSource // Temporary
+        view.weekForecastView.delegate = delegate
         view.weekForecastView.register(WeekForecastCellView.self, forCellWithReuseIdentifier: "weekForecastCell")
     }
     
-    func configureTimedForecastCollectionView() {
+    func configureTimedForecastCollectionView(delegate: WeatherViewController) {
         view.timedForecastView.dataSource = timedForecastDataSource
-        view.timedForecastView.delegate = timedForecastDataSource // Temporary
+        view.timedForecastView.delegate = delegate
         view.timedForecastView.register(TimedForecastCellView.self, forCellWithReuseIdentifier: "timedForecastCell")
     }
     

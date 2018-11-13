@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeekForecastDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class WeekForecastDataSource: NSObject, UICollectionViewDataSource {
     private var items: [WeekdayForecast] = []
     
     var numberOfForecasts: Int {
@@ -33,11 +33,5 @@ class WeekForecastDataSource: NSObject, UICollectionViewDataSource, UICollection
         cell.display(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
         
         return cell
-    }
-}
-
-extension WeekForecastDataSource: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 40)
     }
 }
