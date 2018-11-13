@@ -30,7 +30,7 @@ class WeekForecastDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = retrieveItem(at: indexPath.row)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekForecastCell", for: indexPath) as! WeekForecastCellView
-        cell.display(weekDay: item.getName(), temperatureAtMidday: item.getTemperatureAtMidday(), temperatureAtNight: item.getTemperatureAtNight())
+        cell.display(weekDay: item.weekdayName, temperatureAtMidday: item.temperatureAtMidday, temperatureAtNight: item.temperatureAtNight)
         
         return cell
     }
