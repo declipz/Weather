@@ -8,25 +8,17 @@
 
 import UIKit
 
-protocol WeatherView {
-    func display(currentCity: String?)
-    func display(forecastStatus: String?)
-    func display(currentTemperature: Int?)
-    func display(weekForecast: [WeekdayForecast])
-    func display(timedForecast: [TimedForecast])
-}
-
-final class WeatherViewImplementation: UIView, WeatherView {
-    private let timedForecastDataSource = TimedForecastDataSource()
-    private let weekForecastDataSource = WeekForecastDataSource()
-    private let backgroundImage = UIImageView()
-    private let cityLabel = UILabel()
-    private let forecastStatusLabel = UILabel()
-    private let currentTemperatureLabel = UILabel()
-    private lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-    private lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+final class WeatherViewImplementation: UIView {
+    let backgroundImage = UIImageView()
+    let cityLabel = UILabel()
+    let forecastStatusLabel = UILabel()
+    let currentTemperatureLabel = UILabel()
+    let timedForecastLayout = UICollectionViewFlowLayout()
+    let weekForecastLayout = UICollectionViewFlowLayout()
+    lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    init(delegate: UICollectionViewDelegate) {
+    init() {
         super.init(frame: CGRect.zero)
         backgroundImage.image = UIImage(named: "background")
         addSubview(backgroundImage)
@@ -47,46 +39,23 @@ final class WeatherViewImplementation: UIView, WeatherView {
         addSubview(currentTemperatureLabel)
         activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
         
-        timedForecastView = TimedForecastCollectionView(delegate: delegate, dataSource: timedForecastDataSource)
+        timedForecastLayout.scrollDirection = .horizontal
+        timedForecastView.collectionViewLayout = timedForecastLayout
+        timedForecastView.backgroundColor = .clear
+        timedForecastView.register(TimedForecastCollectionViewCell.self, forCellWithReuseIdentifier: "timedForecastCell")
         addSubview(timedForecastView)
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         
-        weekForecastView = WeekForecastCollectionView(delegate: delegate, dataSource: weekForecastDataSource)
+        weekForecastLayout.scrollDirection = .vertical
+        weekForecastView.collectionViewLayout = weekForecastLayout
+        weekForecastView.backgroundColor = .clear
+        weekForecastView.register(WeekForecastCollectionViewCell.self, forCellWithReuseIdentifier: "weekForecastCell")
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func display(currentCity: String?) {
-        cityLabel.text = currentCity
-    }
-    
-    func display(forecastStatus: String?) {
-        forecastStatusLabel.text = forecastStatus
-    }
-    
-    func display(currentTemperature: Int?) {
-        guard let currentTemperature = currentTemperature else { return }
-        currentTemperatureLabel.text = String(currentTemperature) + "°"
-    }
-    
-    func display(weekForecast: [WeekdayForecast]) {
-        weekForecastDataSource.items = []
-        for forecast in weekForecast {
-            weekForecastDataSource.items.append(forecast)
-        }
-        weekForecastView.reloadData()
-    }
-    
-    func display(timedForecast: [TimedForecast]) {
-        timedForecastDataSource.items = []
-        for forecast in timedForecast {
-            timedForecastDataSource.items.append(forecast)
-        }
-        timedForecastView.reloadData()
     }
 }
 

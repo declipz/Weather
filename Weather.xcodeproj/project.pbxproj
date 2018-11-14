@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6562663219C14760027AC22 /* TimedForecastCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6562662219C14760027AC22 /* TimedForecastCollectionView.swift */; };
-		D6562665219C16610027AC22 /* WeekForecastCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6562664219C16610027AC22 /* WeekForecastCollectionView.swift */; };
 		D6775877217DDC2100B30A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6775876217DDC2100B30A5D /* AppDelegate.swift */; };
 		D677587E217DDC2600B30A5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D677587D217DDC2600B30A5D /* Assets.xcassets */; };
 		D677588C217DDD1A00B30A5D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D677588B217DDD1A00B30A5D /* WeatherViewController.swift */; };
@@ -23,8 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D6562662219C14760027AC22 /* TimedForecastCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastCollectionView.swift; sourceTree = "<group>"; };
-		D6562664219C16610027AC22 /* WeekForecastCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCollectionView.swift; sourceTree = "<group>"; };
 		D6775873217DDC2100B30A5D /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6775876217DDC2100B30A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D677587D217DDC2600B30A5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -122,8 +118,6 @@
 				D677588B217DDD1A00B30A5D /* WeatherViewController.swift */,
 				D677588F217DDEED00B30A5D /* WeatherPresenter.swift */,
 				D677588D217DDD4B00B30A5D /* WeatherView.swift */,
-				D6562662219C14760027AC22 /* TimedForecastCollectionView.swift */,
-				D6562664219C16610027AC22 /* WeekForecastCollectionView.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -199,7 +193,6 @@
 			files = (
 				D677589A217E002F00B30A5D /* TimedForecastCollectionViewCell.swift in Sources */,
 				D6775894217DEBE800B30A5D /* TimedForecast.swift in Sources */,
-				D6562663219C14760027AC22 /* TimedForecastCollectionView.swift in Sources */,
 				D6775892217DEBCE00B30A5D /* WeekdayForecast.swift in Sources */,
 				D677588E217DDD4B00B30A5D /* WeatherView.swift in Sources */,
 				D6775890217DDEED00B30A5D /* WeatherPresenter.swift in Sources */,
@@ -207,7 +200,6 @@
 				D6E0C5112199E03600DBD822 /* TimedForecastDataSource.swift in Sources */,
 				D6E0C5132199E64B00DBD822 /* WeekForecastDataSource.swift in Sources */,
 				D6775877217DDC2100B30A5D /* AppDelegate.swift in Sources */,
-				D6562665219C16610027AC22 /* WeekForecastCollectionView.swift in Sources */,
 				D677588C217DDD1A00B30A5D /* WeatherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
