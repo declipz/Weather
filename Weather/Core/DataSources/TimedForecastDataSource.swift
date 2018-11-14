@@ -9,22 +9,10 @@
 import UIKit
 
 class TimedForecastDataSource: NSObject, UICollectionViewDataSource {
-    private var items: [TimedForecast] = []
+    var items: [TimedForecast] = []
     
     var numberOfForecasts: Int {
         return items.count
-    }
-    
-    func retrieveItem(at index: Int) -> TimedForecast {
-        return items[index]
-    }
-    
-    func addForecast(_ item: TimedForecast) {
-        items.append(item)
-    }
-    
-    func removeAllForecasts() {
-        items = []
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,7 +20,7 @@ class TimedForecastDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = retrieveItem(at: indexPath.row)
+        let item = items[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timedForecastCell", for: indexPath) as! TimedForecastCollectionViewCell
         cell.display(time: item.time, temperature: item.temperature)
         

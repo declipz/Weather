@@ -74,17 +74,17 @@ final class WeatherViewImplementation: UIView, WeatherView {
     }
     
     func display(weekForecast: [WeekdayForecast]) {
-        weekForecastDataSource.removeAllForecasts()
+        weekForecastDataSource.items = []
         for forecast in weekForecast {
-            weekForecastDataSource.addForecast(forecast)
+            weekForecastDataSource.items.append(forecast)
         }
         weekForecastView.reloadData()
     }
     
     func display(timedForecast: [TimedForecast]) {
-        timedForecastDataSource.removeAllForecasts()
+        timedForecastDataSource.items = []
         for forecast in timedForecast {
-            timedForecastDataSource.addForecast(forecast)
+            timedForecastDataSource.items.append(forecast)
         }
         timedForecastView.reloadData()
     }

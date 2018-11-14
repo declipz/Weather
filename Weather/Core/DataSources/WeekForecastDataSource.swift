@@ -9,22 +9,10 @@
 import UIKit
 
 class WeekForecastDataSource: NSObject, UICollectionViewDataSource {
-    private var items: [WeekdayForecast] = []
+    var items: [WeekdayForecast] = []
     
     var numberOfForecasts: Int {
         return items.count
-    }
-    
-    func retrieveItem(at index: Int) -> WeekdayForecast {
-        return items[index]
-    }
-    
-    func addForecast(_ item: WeekdayForecast) {
-        items.append(item)
-    }
-    
-    func removeAllForecasts() {
-        items = []
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,7 +20,7 @@ class WeekForecastDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = retrieveItem(at: indexPath.row)
+        let item = items[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weekForecastCell", for: indexPath) as! WeekForecastCollectionViewCell
         cell.display(weekDay: item.weekdayName, temperatureAtMidday: item.temperatureAtMidday, temperatureAtNight: item.temperatureAtNight)
         
