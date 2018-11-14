@@ -30,14 +30,6 @@ final class TimedForecastCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateTimeLabel(text: String) {
-        timeLabel.text = text
-    }
-    
-    func updateTemperatureLabel(text: Int) {
-        temperatureLabel.text = String(text)
-    }
-    
     func display(time: String, temperature: Int) {
         timeLabel.textColor = .white
         timeLabel.text = time
