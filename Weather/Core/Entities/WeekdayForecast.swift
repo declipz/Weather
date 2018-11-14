@@ -9,23 +9,13 @@
 import Foundation
 
 class WeekdayForecast {
-    private var weekdayName: String
-    private var temperatureAtMidday: Int
-    private var temperatureAtNight: Int
+    var weekdayName: String
+    var temperatureAtMidday: Int
+    var temperatureAtNight: Int
     
     init(on weekdayName: String, temperatureAtMidday: Int, temperatureAtNight: Int) {
         self.weekdayName = weekdayName
         self.temperatureAtMidday = temperatureAtMidday
         self.temperatureAtNight = temperatureAtNight
-    }
-    
-    func getName() -> String {
-        return self.weekdayName
-    }
-    func getTemperatureAtMidday() -> Int {
-        return self.temperatureAtMidday
-    }
-    func getTemperatureAtNight() -> Int {
-        return self.temperatureAtNight
     }
 }
