@@ -18,18 +18,19 @@ final class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weatherView = WeatherView()
-        presenter = WeatherPresenterImplementation(view: weatherView)
-        presenter.configureTimedForecastCollectionView(delegate: self)
-        presenter.configureWeekForecastCollectionView(delegate: self)
-        presenter.viewDidLoad()
+        let weatherView = WeatherViewImplementation()
+        weatherView.timedForecastView.delegate = self
+        weatherView.weekForecastView.delegate = self
         self.view = weatherView
+        
+        presenter = WeatherPresenterImplementation(view: weatherView)
+        presenter.viewDidLoad()
     }
 }
 
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let view = view as? WeatherView else { return CGSize.zero }
+        guard let view = view as? WeatherViewImplementation else { return CGSize.zero }
         if collectionView == view.timedForecastView {
             return CGSize(width: 60, height: 90)
         }

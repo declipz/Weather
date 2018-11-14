@@ -10,12 +10,6 @@ import Foundation
 
 protocol WeatherPresenter {
     func viewDidLoad()
-    func configureWeekForecastCollectionView(delegate: WeatherViewController)
-    func configureTimedForecastCollectionView(delegate: WeatherViewController)
-    func updateData()
-    func updateCityLabel()
-    func updateForecastStatusLabel()
-    func updateCurrentTemperature()
 }
 
 class WeatherPresenterImplementation: WeatherPresenter {
@@ -31,47 +25,20 @@ class WeatherPresenterImplementation: WeatherPresenter {
     }
     
     func viewDidLoad() {
-        updateData()
-        updateCityLabel()
-        updateForecastStatusLabel()
-        updateCurrentTemperature()
-    }
-    
-    func configureWeekForecastCollectionView(delegate: WeatherViewController) {
-        view.weekForecastView.dataSource = weekForecastDataSource
-        view.weekForecastView.delegate = delegate
-        view.weekForecastView.register(WeekForecastCollectionViewCell.self, forCellWithReuseIdentifier: "weekForecastCell")
-    }
-    
-    func configureTimedForecastCollectionView(delegate: WeatherViewController) {
-        view.timedForecastView.dataSource = timedForecastDataSource
-        view.timedForecastView.delegate = delegate
-        view.timedForecastView.register(TimedForecastCollectionViewCell.self, forCellWithReuseIdentifier: "timedForecastCell")
-    }
-    
-    func updateData() {
-        currentCity = "Minsk"
-        forecastStatus = "Partly cloudly"
-        currentTemperature = 2
+        view.display(currentCity: "Minsk")
+        view.display(forecastStatus: "Partly cloudly")
+        view.display(currentTemperature: 2)
         
+        var timedForecastItems: [TimedForecast] = []
+        var weekForecastItems: [WeekdayForecast] = []
         for index in 1...10 {
             let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
-            timedForecastDataSource.addForecast(timedForecast)
+            timedForecastItems.append(timedForecast)
             
             let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
-            weekForecastDataSource.addForecast(weekForecast)
+            weekForecastItems.append(weekForecast)
         }
-    }
-    
-    func updateCityLabel() {
-        view.display(city: currentCity)
-    }
-    
-    func updateForecastStatusLabel() {
-        view.display(forecastStatus: forecastStatus)
-    }
-    
-    func updateCurrentTemperature() {
-        view.display(currentTemperature: currentTemperature)
+        view.display(timedForecast: timedForecastItems)
+        view.display(weekForecast: weekForecastItems)
     }
 }

@@ -8,7 +8,17 @@
 
 import UIKit
 
-final class WeatherView: UIView {
+protocol WeatherView {
+    func display(currentCity: String?)
+    func display(forecastStatus: String?)
+    func display(currentTemperature: Int?)
+    func display(weekForecast: [WeekdayForecast])
+    func display(timedForecast: [TimedForecast])
+}
+
+final class WeatherViewImplementation: UIView, WeatherView {
+    private let timedForecastDataSource = TimedForecastDataSource()
+    private let weekForecastDataSource = WeekForecastDataSource()
     private let backgroundImage = UIImageView()
     private let cityLabel = UILabel()
     private let forecastStatusLabel = UILabel()
@@ -40,12 +50,16 @@ final class WeatherView: UIView {
         activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
         
         timedForecastLayout.scrollDirection = .horizontal
-        timedForecastView.backgroundColor = .clear       
+        timedForecastView.backgroundColor = .clear
+        timedForecastView.dataSource = timedForecastDataSource
+        timedForecastView.register(TimedForecastCollectionViewCell.self, forCellWithReuseIdentifier: "timedForecastCell")
         addSubview(timedForecastView)
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         
         weekForecastLayout.scrollDirection = .vertical
         weekForecastView.backgroundColor = .clear
+        weekForecastView.dataSource = weekForecastDataSource
+        weekForecastView.register(WeekForecastCollectionViewCell.self, forCellWithReuseIdentifier: "weekForecastCell")
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
     }
@@ -54,8 +68,8 @@ final class WeatherView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func display(city: String?) {
-        cityLabel.text = city
+    func display(currentCity: String?) {
+        cityLabel.text = currentCity
     }
     
     func display(forecastStatus: String?) {
@@ -66,10 +80,26 @@ final class WeatherView: UIView {
         guard let currentTemperature = currentTemperature else { return }
         currentTemperatureLabel.text = String(currentTemperature) + "°"
     }
+    
+    func display(weekForecast: [WeekdayForecast]) {
+        weekForecastDataSource.removeAllForecasts()
+        for forecast in weekForecast {
+            weekForecastDataSource.addForecast(forecast)
+        }
+        weekForecastView.reloadData()
+    }
+    
+    func display(timedForecast: [TimedForecast]) {
+        timedForecastDataSource.removeAllForecasts()
+        for forecast in timedForecast {
+            timedForecastDataSource.addForecast(forecast)
+        }
+        timedForecastView.reloadData()
+    }
 }
 
-private typealias PrivateWeatherView = WeatherView
-private extension PrivateWeatherView {
+private typealias PrivateWeatherViewImplementation = WeatherViewImplementation
+private extension PrivateWeatherViewImplementation {
     func activateBackgroundConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false

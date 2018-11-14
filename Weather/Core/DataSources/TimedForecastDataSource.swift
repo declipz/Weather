@@ -23,6 +23,10 @@ class TimedForecastDataSource: NSObject, UICollectionViewDataSource {
         items.append(item)
     }
     
+    func removeAllForecasts() {
+        items = []
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfForecasts
     }
