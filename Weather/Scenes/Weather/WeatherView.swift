@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class WeatherViewImplementation: UIView {
+final class WeatherViewContent: UIView {
     let backgroundImage = UIImageView()
     let cityLabel = UILabel()
     let forecastStatusLabel = UILabel()
@@ -59,8 +59,8 @@ final class WeatherViewImplementation: UIView {
     }
 }
 
-private typealias PrivateWeatherViewImplementation = WeatherViewImplementation
-private extension PrivateWeatherViewImplementation {
+private typealias PrivateWeatherContent = WeatherViewContent
+private extension PrivateWeatherContent {
     func activateBackgroundConstraints(view: UIView) {
         guard let superview = view.superview else { return }
         view.translatesAutoresizingMaskIntoConstraints = false

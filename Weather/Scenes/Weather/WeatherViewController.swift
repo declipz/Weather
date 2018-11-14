@@ -17,8 +17,7 @@ protocol WeatherView {
 }
 
 final class WeatherViewController: UIViewController, WeatherView {
-    
-    let weatherView = WeatherViewImplementation()
+    let weatherView = WeatherViewContent()
     let timedForecastDataSource = TimedForecastDataSource()
     let weekForecastDataSource = WeekForecastDataSource()
     
@@ -58,7 +57,6 @@ final class WeatherViewController: UIViewController, WeatherView {
         for forecast in weekForecast {
             weekForecastDataSource.items.append(forecast)
         }
-        
         weatherView.weekForecastView.reloadData()
     }
     
@@ -73,11 +71,10 @@ final class WeatherViewController: UIViewController, WeatherView {
 
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let view = view as? WeatherViewImplementation else { return CGSize.zero }
-        if collectionView == view.timedForecastView {
+        if collectionView == weatherView.timedForecastView {
             return CGSize(width: 60, height: 90)
         }
-        if collectionView == view.weekForecastView {
+        if collectionView == weatherView.weekForecastView {
             return CGSize(width: collectionView.bounds.width, height: 40)
         }
         return CGSize.zero
