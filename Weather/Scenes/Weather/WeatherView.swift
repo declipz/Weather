@@ -23,12 +23,10 @@ final class WeatherViewImplementation: UIView, WeatherView {
     private let cityLabel = UILabel()
     private let forecastStatusLabel = UILabel()
     private let currentTemperatureLabel = UILabel()
-    private let timedForecastLayout = UICollectionViewFlowLayout()
-    lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: timedForecastLayout)
-    private let weekForecastLayout = UICollectionViewFlowLayout()
-    lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: weekForecastLayout)
+    private lazy var timedForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var weekForecastView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    init() {
+    init(delegate: UICollectionViewDelegate) {
         super.init(frame: CGRect.zero)
         backgroundImage.image = UIImage(named: "background")
         addSubview(backgroundImage)
@@ -49,17 +47,11 @@ final class WeatherViewImplementation: UIView, WeatherView {
         addSubview(currentTemperatureLabel)
         activateCurrentTemperatureLabelConstraints(view: currentTemperatureLabel, anchorView: forecastStatusLabel)
         
-        timedForecastLayout.scrollDirection = .horizontal
-        timedForecastView.backgroundColor = .clear
-        timedForecastView.dataSource = timedForecastDataSource
-        timedForecastView.register(TimedForecastCollectionViewCell.self, forCellWithReuseIdentifier: "timedForecastCell")
+        timedForecastView = TimedForecastCollectionView(delegate: delegate, dataSource: timedForecastDataSource)
         addSubview(timedForecastView)
         activateTimedForecastViewConstraints(view: timedForecastView, anchorView: currentTemperatureLabel)
         
-        weekForecastLayout.scrollDirection = .vertical
-        weekForecastView.backgroundColor = .clear
-        weekForecastView.dataSource = weekForecastDataSource
-        weekForecastView.register(WeekForecastCollectionViewCell.self, forCellWithReuseIdentifier: "weekForecastCell")
+        weekForecastView = WeekForecastCollectionView(delegate: delegate, dataSource: weekForecastDataSource)
         addSubview(weekForecastView)
         activateWeekForecastViewConstraints(view: weekForecastView, anchorView: timedForecastView)
     }
