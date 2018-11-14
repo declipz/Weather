@@ -31,9 +31,7 @@ final class TimedForecastCollectionViewCell: UICollectionViewCell {
     }
     
     func display(time: String, temperature: Int) {
-        timeLabel.textColor = .white
         timeLabel.text = time
-        temperatureLabel.textColor = .white
         temperatureLabel.text = String(temperature) + "°"
     }
 }

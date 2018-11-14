@@ -22,7 +22,7 @@ final class WeekForecastCollectionViewCell: UICollectionViewCell {
         activateWeekdayLabelConstraints(view: weekDayNameLabel)
         
         temperatureAtNightLabel.font = .boldSystemFont(ofSize: 17)
-        temperatureAtNightLabel.textColor = .white
+        temperatureAtNightLabel.textColor = .lightGray
         contentView.addSubview(temperatureAtNightLabel)
         activateTemperatureAtNightLabelConstraints(view: temperatureAtNightLabel)
         
@@ -37,11 +37,8 @@ final class WeekForecastCollectionViewCell: UICollectionViewCell {
     }
     
     func display(weekDay: String, temperatureAtMidday: Int, temperatureAtNight: Int) {
-        weekDayNameLabel.textColor = .white
         weekDayNameLabel.text = weekDay
-        temperatureAtMiddayLabel.textColor = .white
         temperatureAtMiddayLabel.text = String(temperatureAtMidday) + "°"
-        temperatureAtNightLabel.textColor = .lightGray
         temperatureAtNightLabel.text = String(temperatureAtNight) + "°"
     }
 }
