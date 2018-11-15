@@ -12,14 +12,11 @@ import Alamofire
 struct ForecastData {
     var date: Date
     var temperature: Int
+    var status: String
 }
 
 class OpenWeatherService {
-    private static func fetchJSON(data: Any) {
-        
-    }
-    
-    func fetchData(in city: String, using appid: String, completion: @escaping ([TimedForecast], [WeekdayForecast]) -> ()) {
+    func fetchData(in city: String, using appid: String, completion: @escaping (CurrentForecast, [TimedForecast], [WeekdayForecast]) -> ()) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -36,6 +33,7 @@ class OpenWeatherService {
                 
                 var weekForecastData = [WeekdayForecast]()
                 var timedForecastData = [TimedForecast]()
+                var currentForecast = CurrentForecast(in: "--", is: 0, status: "--") // Needs to be changed
                 var forecastList = [ForecastData]()
                 if let data = response.result.value as? [String: Any],
                     let list = data["list"] as? [[String: Any]] {
@@ -43,15 +41,21 @@ class OpenWeatherService {
                         guard let dateString = item["dt_txt"] as? String,
                             let date = dateFormatter.date(from: dateString),
                             let main = item["main"] as? [String: Any],
-                            let doubleTemperature = main["temp"] as? Double else { return }
+                            let doubleTemperature = main["temp"] as? Double,
+                            let weather = item["weather"] as? [[String: Any]],
+                            let status = weather[0]["description"] as? String else { return }
                         //let weekDay = dayFortmatter.string(from: date)
                         //let hours = calendar.component(.hour, from: date)
                         let temperature = Int(doubleTemperature)
-                        forecastList.append(ForecastData(date: date, temperature: temperature))
+                        forecastList.append(ForecastData(date: date, temperature: temperature, status: status))
                     }
                     
-                    
                     for item in forecastList {
+                        if timedForecastData.count == 0 {
+                            currentForecast.city = city
+                            currentForecast.status = item.status
+                            currentForecast.temperature = item.temperature
+                        }
                         if timedForecastData.count < 8 {
                             let hoursValue = calendar.component(.hour, from: item.date)
                             let hours = String(hoursValue) + ":00"
@@ -82,7 +86,7 @@ class OpenWeatherService {
                         }
                     }
                 }
-                completion(timedForecastData, weekForecastData)
+                completion(currentForecast, timedForecastData, weekForecastData)
             case .failure(let error):
                 print(error)
             }
