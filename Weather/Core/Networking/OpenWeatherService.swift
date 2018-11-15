@@ -19,7 +19,7 @@ class OpenWeatherService {
         
     }
     
-    func fetchData(in city: String, using appid: String, completion: @escaping () -> ()) {
+    func fetchData(in city: String, using appid: String, completion: @escaping ([TimedForecast], [WeekdayForecast]) -> ()) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -34,6 +34,8 @@ class OpenWeatherService {
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 dayFortmatter.dateFormat = "EEEE"
                 
+                var weekForecastData = [WeekdayForecast]()
+                var timedForecastData = [TimedForecast]()
                 var forecastList = [ForecastData]()
                 if let data = response.result.value as? [String: Any],
                     let list = data["list"] as? [[String: Any]] {
@@ -48,8 +50,7 @@ class OpenWeatherService {
                         forecastList.append(ForecastData(date: date, temperature: temperature))
                     }
                     
-                    var weekForecastData = [WeekdayForecast]()
-                    var timedForecastData = [TimedForecast]()
+                    
                     for item in forecastList {
                         if timedForecastData.count < 8 {
                             let hoursValue = calendar.component(.hour, from: item.date)
@@ -74,19 +75,14 @@ class OpenWeatherService {
                         if let nightTemperature = currentNightTemperature,
                             let dayTemperature = currentDayTemperature,
                             let weekDay = currentWeekDay {
-                            weekForecastData.append(WeekdayForecast(on: weekDay, temperatureAtMidday: nightTemperature, temperatureAtNight: dayTemperature))
+                            weekForecastData.append(WeekdayForecast(on: weekDay, temperatureAtMidday: dayTemperature, temperatureAtNight: nightTemperature))
                             currentNightTemperature = nil
                             currentDayTemperature = nil
                             currentWeekDay = nil
                         }
                     }
-                    
-                    for item in weekForecastData {
-                        print("\(item.weekdayName) -- \(item.temperatureAtMidday) -- \(item.temperatureAtNight)")
-                    }
-                    //print(forecastList)
                 }
-                completion()
+                completion(timedForecastData, weekForecastData)
             case .failure(let error):
                 print(error)
             }

@@ -29,16 +29,14 @@ class WeatherPresenterImplementation: WeatherPresenter {
         view.display(forecastStatus: "Partly cloudly")
         view.display(currentTemperature: 2)
         
-        var timedForecastItems: [TimedForecast] = []
-        var weekForecastItems: [WeekdayForecast] = []
-        for index in 1...10 {
-            let timedForecast = TimedForecast(at: String(index) + " AM", is: index)
-            timedForecastItems.append(timedForecast)
-            
-            let weekForecast = WeekdayForecast(on: String(index) + "day", temperatureAtMidday: index, temperatureAtNight: index)
-            weekForecastItems.append(weekForecast)
+        if let path = Bundle.main.path(forResource: "APIKeys", ofType: "plist"),
+            let keys = NSDictionary(contentsOfFile: path),
+            let appid = keys["OpenWeather API Key"] as? String {
+            let service = OpenWeatherService()
+            service.fetchData(in: "Minsk", using: appid) { timedForecastData, weekForecastData in
+                self.view.display(timedForecast: timedForecastData)
+                self.view.display(weekForecast: weekForecastData)
+            }
         }
-        view.display(timedForecast: timedForecastItems)
-        view.display(weekForecast: weekForecastItems)
     }
 }
