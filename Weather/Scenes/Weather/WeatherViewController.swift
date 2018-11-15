@@ -30,6 +30,17 @@ final class WeatherViewController: UIViewController, WeatherView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = weatherView
+        
+        if let path = Bundle.main.path(forResource: "APIKeys", ofType: "plist"),
+            let keys = NSDictionary(contentsOfFile: path),
+            let appid = keys["OpenWeather API Key"] as? String {
+            let service = OpenWeatherService()
+            service.fetchData(in: "Minsk", using: appid) {
+                print("Done!")
+            }
+        }
+        
+        
         weatherView.weekForecastView.delegate = self
         weatherView.weekForecastView.dataSource = weekForecastDataSource
         weatherView.timedForecastView.delegate = self
