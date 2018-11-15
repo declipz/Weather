@@ -14,11 +14,6 @@ protocol WeatherPresenter {
 
 class WeatherPresenterImplementation: WeatherPresenter {
     let view: WeatherView!
-    let weekForecastDataSource = WeekForecastDataSource()
-    let timedForecastDataSource = TimedForecastDataSource()
-    var currentCity: String?
-    var forecastStatus: String?
-    var currentTemperature: Int?
     
     init(view: WeatherView) {
         self.view = view
