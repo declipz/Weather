@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'Weather' do
     pod 'Alamofire', '~> 4.7'
+    pod 'ObjectMapper', '~> 3.4'
 end

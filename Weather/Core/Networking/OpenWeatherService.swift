@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 struct ForecastData {
     var date: Date
@@ -15,78 +16,113 @@ struct ForecastData {
     var status: String
 }
 
+private class FetchedForecast: Mappable {
+    var temperature: Int?
+    var date: Date?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        temperature <- (map["main.temp"], TransformOf<Int, Double>(fromJSON: { Int($0!) }, toJSON: { $0.map { Double($0) } }))
+        date        <- (map["dt_txt"], TransformOf<Date, String>(fromJSON: {
+            let dateFormatter = DateFormatter()
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            return dateFormatter.date(from: $0!)
+        }, toJSON: { $0.map { $0.description } }))
+        temperature <- (map["main.temp"], TransformOf<Int, Double>(fromJSON: {
+            Int($0!)
+        }, toJSON: { $0.map { Double($0) } }))
+    }
+}
+
 class OpenWeatherService {
-    func fetchData(in city: String, using appid: String, completion: @escaping (CurrentForecast, [TimedForecast], [WeekdayForecast]) -> ()) {
+    private let appid = "604fdceb4fa7aca4071f571bdc3027c7"
+    
+    func fetchCurrentForecast(city: String, completion: @escaping (CurrentForecast?) -> ()) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
+                guard let json = response.result.value as? [String: Any] else { return }
+                let currentForecast = CurrentForecast(JSON: json)
+                completion(currentForecast)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchTimedForecast(city: String, completion: @escaping ([TimedForecast]) -> ()) {
+        Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                guard let json = response.result.value as? [String: Any],
+                    let forecastList = json["list"] as? [[String: Any]] else { return }
+                var timedForecastList = [TimedForecast]()
                 
-                let dateFormatter = DateFormatter()
-                let dayFortmatter = DateFormatter()
-                var calendar = Calendar.current
-                let timeZone = TimeZone(secondsFromGMT: 0)
-                calendar.timeZone = timeZone!
-                dateFormatter.timeZone = timeZone
-                dayFortmatter.locale = Locale(identifier: "en_US_POSIX")
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                dayFortmatter.dateFormat = "EEEE"
-                
-                var weekForecastData = [WeekdayForecast]()
-                var timedForecastData = [TimedForecast]()
-                var currentForecast = CurrentForecast(in: "--", is: 0, status: "--") // Needs to be changed
-                var forecastList = [ForecastData]()
-                if let data = response.result.value as? [String: Any],
-                    let list = data["list"] as? [[String: Any]] {
-                    for item in list {
-                        guard let dateString = item["dt_txt"] as? String,
-                            let date = dateFormatter.date(from: dateString),
-                            let main = item["main"] as? [String: Any],
-                            let doubleTemperature = main["temp"] as? Double,
-                            let weather = item["weather"] as? [[String: Any]],
-                            let status = weather[0]["description"] as? String else { return }
-                        //let weekDay = dayFortmatter.string(from: date)
-                        //let hours = calendar.component(.hour, from: date)
-                        let temperature = Int(doubleTemperature)
-                        forecastList.append(ForecastData(date: date, temperature: temperature, status: status))
-                    }
-                    
-                    for item in forecastList {
-                        if timedForecastData.count == 0 {
-                            currentForecast.city = city
-                            currentForecast.status = item.status
-                            currentForecast.temperature = item.temperature
-                        }
-                        if timedForecastData.count < 8 {
-                            let hoursValue = calendar.component(.hour, from: item.date)
-                            let hours = String(hoursValue) + ":00"
-                            timedForecastData.append(TimedForecast(at: hours, is: item.temperature))
-                        }
-                    }
-                    
-                    var currentNightTemperature: Int?
-                    var currentDayTemperature: Int?
-                    var currentWeekDay: String?
-                    for item in forecastList {
-                        if calendar.isDateInToday(item.date) { continue }
-                        let hours = calendar.component(.hour, from: item.date)
-                        if hours == 0 {
-                            currentNightTemperature = item.temperature
-                        }
-                        if hours == 12 {
-                            currentDayTemperature = item.temperature
-                            currentWeekDay = dayFortmatter.string(from: item.date)
-                        }
-                        if let nightTemperature = currentNightTemperature,
-                            let dayTemperature = currentDayTemperature,
-                            let weekDay = currentWeekDay {
-                            weekForecastData.append(WeekdayForecast(on: weekDay, temperatureAtMidday: dayTemperature, temperatureAtNight: nightTemperature))
-                            currentNightTemperature = nil
-                            currentDayTemperature = nil
-                            currentWeekDay = nil
-                        }
+                for forecast in forecastList {
+                    if timedForecastList.count == 8 { break }
+                    if let timedForecast = TimedForecast(JSON: forecast) {
+                        timedForecastList.append(timedForecast)
                     }
                 }
-                completion(currentForecast, timedForecastData, weekForecastData)
+                completion(timedForecastList)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func fetchWeekForecast(city: String, completion: @escaping ([WeekdayForecast]) -> ()) {
+        Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                guard let json = response.result.value as? [String: Any],
+                    let forecastList = json["list"] as? [[String: Any]] else { return }
+                var fetchedForecastList = [FetchedForecast]()
+                
+                for forecast in forecastList {
+                    if let fetchedForecast = FetchedForecast(JSON: forecast) {
+                        fetchedForecastList.append(fetchedForecast)
+                    }
+                }
+                
+                // Used for getting "hour" component from date
+                var calendar = Calendar.current
+                // Used for getting weekday name
+                let dayFormatter = DateFormatter()
+                dayFormatter.dateFormat = "EEEE"
+                // To avoid time zone differences cast to zero one
+                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+                dayFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                
+                // Using only 12 AM\PM forecasts to get night\midday temperature
+                fetchedForecastList = fetchedForecastList.filter({
+                    let hours = calendar.component(.hour, from: $0.date!)
+                    return hours == 0 || hours == 12
+                })
+                
+                // Monkey code, needs to be changed
+                var index = 1
+                var weekForecastList = [WeekdayForecast]()
+                while index < fetchedForecastList.count {
+                    let currentDate = fetchedForecastList[index].date!
+                    let hours = calendar.component(.hour, from: currentDate)
+                    if hours != 12 {
+                        index += 1
+                        continue
+                    }
+                    let weekDay = dayFormatter.string(from: currentDate)
+                    let weekDayForecast = WeekdayForecast(on: weekDay, temperatureAtMidday: fetchedForecastList[index].temperature, temperatureAtNight: fetchedForecastList[index - 1].temperature)
+                    weekForecastList.append(weekDayForecast!)
+                    index += 2
+                }
+                
+                completion(weekForecastList)
             case .failure(let error):
                 print(error)
             }

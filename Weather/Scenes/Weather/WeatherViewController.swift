@@ -26,18 +26,20 @@ final class WeatherViewController: UIViewController, WeatherView {
     }
     
     var presenter: WeatherPresenter!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view = weatherView
-        
+    
+    override func loadView() {
+        view = weatherView
         weatherView.weekForecastView.delegate = self
         weatherView.weekForecastView.dataSource = weekForecastDataSource
         weatherView.timedForecastView.delegate = self
         weatherView.timedForecastView.dataSource = timedForecastDataSource
-        
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter = WeatherPresenterImplementation(view: self)
         presenter.viewDidLoad()
+        
     }
     
     func display(currentCity: String?) {

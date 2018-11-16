@@ -30,9 +30,9 @@ final class TimedForecastCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func display(time: String, temperature: Int) {
+    func display(time: String?, temperature: Int?) {
         timeLabel.text = time
-        temperatureLabel.text = String(temperature) + "°"
+        temperatureLabel.text = String(temperature ?? 0) + "°"
     }
 }
 
