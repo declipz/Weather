@@ -33,15 +33,15 @@ class WeatherPresenterImplementation: WeatherPresenter {
             }
         }
         DispatchQueue.global(qos: .userInitiated).async {
-            DispatchQueue.main.async {
-                service.fetchTimedForecast(city: "Minsk") { timedForecastList in
+            service.fetchTimedForecast(city: "Minsk") { timedForecastList in
+                DispatchQueue.main.async {
                     self.view.display(timedForecast: timedForecastList)
                 }
             }
         }
         DispatchQueue.global(qos: .userInitiated).async {
-            DispatchQueue.main.async {
-                service.fetchWeekForecast(city: "Minsk") { weekForecastList in
+            service.fetchWeekForecast(city: "Minsk") { weekForecastList in
+                DispatchQueue.main.async {
                     self.view.display(weekForecast: weekForecastList)
                 }
             }
