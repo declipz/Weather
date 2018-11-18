@@ -9,8 +9,8 @@
 import Foundation
 
 class TimedForecast {
-    var time: String
-    var temperature: String
+    let time: String
+    let temperature: String
 
     init(time: String, temperature: String) {
         self.time = time

@@ -9,9 +9,9 @@
 import Foundation
 
 class CurrentForecast {
-    var city: String
-    var temperature: String
-    var status: String
+    let city: String
+    let temperature: String
+    let status: String
     
     init(city: String, temperature: String, status: String) {
         self.city = city
