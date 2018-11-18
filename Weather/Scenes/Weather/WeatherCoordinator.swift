@@ -22,7 +22,8 @@ class WeatherCoordinator: Coordinator {
     func start() {
         let viewController = WeatherViewController()
         view = viewController
-        presenter = WeatherPresenterImplementation(view: view)
+        presenter = WeatherPresenterImplementation(view: view, service: service)
+        viewController.presenter = presenter // Probably needs to be redone
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }

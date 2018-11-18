@@ -9,9 +9,7 @@
 import UIKit
 
 protocol WeatherView {
-    func display(currentCity: String?)
-    func display(forecastStatus: String?)
-    func display(currentTemperature: Int?)
+    func display(currentForecast: CurrentForecast)
     func display(weekForecast: [WeekdayForecast])
     func display(timedForecast: [TimedForecast])
 }
@@ -37,22 +35,14 @@ final class WeatherViewController: UIViewController, WeatherView {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = WeatherPresenterImplementation(view: self)
         presenter.viewDidLoad()
         
     }
     
-    func display(currentCity: String?) {
-        weatherView.cityLabel.text = currentCity
-    }
-    
-    func display(forecastStatus: String?) {
-        weatherView.forecastStatusLabel.text = forecastStatus
-    }
-    
-    func display(currentTemperature: Int?) {
-        guard let currentTemperature = currentTemperature else { return }
-        weatherView.currentTemperatureLabel.text = String(currentTemperature) + "°"
+    func display(currentForecast: CurrentForecast) {
+        weatherView.cityLabel.text = currentForecast.city
+        weatherView.currentTemperatureLabel.text = currentForecast.temperature
+        weatherView.forecastStatusLabel.text = currentForecast.status
     }
     
     func display(weekForecast: [WeekdayForecast]) {

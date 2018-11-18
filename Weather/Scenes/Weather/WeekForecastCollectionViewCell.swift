@@ -36,10 +36,10 @@ final class WeekForecastCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func display(weekDay: String?, temperatureAtMidday: Int?, temperatureAtNight: Int?) {
+    func display(weekDay: String, temperatureAtMidday: String, temperatureAtNight: String) {
         weekDayNameLabel.text = weekDay
-        temperatureAtMiddayLabel.text = String(temperatureAtMidday ?? 0) + "°"
-        temperatureAtNightLabel.text = String(temperatureAtNight ?? 0) + "°"
+        temperatureAtMiddayLabel.text = temperatureAtMidday
+        temperatureAtNightLabel.text = temperatureAtNight
     }
 }
 

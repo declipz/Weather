@@ -11,6 +11,10 @@
 		D608BC04219D65AD00E084FD /* OpenWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D608BC03219D65AD00E084FD /* OpenWeatherService.swift */; };
 		D662947421A1D5DE0048A662 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947321A1D5DE0048A662 /* AppCoordinator.swift */; };
 		D662947621A1D6A40048A662 /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947521A1D6A40048A662 /* WeatherCoordinator.swift */; };
+		D662947821A1D9B10048A662 /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947721A1D9B10048A662 /* Weekday.swift */; };
+		D662947A21A1DA180048A662 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947921A1DA180048A662 /* Forecast.swift */; };
+		D662947C21A200890048A662 /* Date+Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947B21A200890048A662 /* Date+Weekday.swift */; };
+		D662947E21A204F50048A662 /* Date+Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662947D21A204F50048A662 /* Date+Hours.swift */; };
 		D66F1780219E060D0095232D /* CurrentForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66F177F219E060D0095232D /* CurrentForecast.swift */; };
 		D6775877217DDC2100B30A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6775876217DDC2100B30A5D /* AppDelegate.swift */; };
 		D677587E217DDC2600B30A5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D677587D217DDC2600B30A5D /* Assets.xcassets */; };
@@ -23,7 +27,6 @@
 		D677589C217E019C00B30A5D /* WeekForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D677589B217E019C00B30A5D /* WeekForecastCollectionViewCell.swift */; };
 		D6E0C5112199E03600DBD822 /* TimedForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0C5102199E03600DBD822 /* TimedForecastDataSource.swift */; };
 		D6E0C5132199E64B00DBD822 /* WeekForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E0C5122199E64B00DBD822 /* WeekForecastDataSource.swift */; };
-		D6F7A6E6219D960700FB7C36 /* APIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6F7A6E5219D960700FB7C36 /* APIKeys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,10 @@
 		D608BC03219D65AD00E084FD /* OpenWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherService.swift; sourceTree = "<group>"; };
 		D662947321A1D5DE0048A662 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		D662947521A1D6A40048A662 /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
+		D662947721A1D9B10048A662 /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		D662947921A1DA180048A662 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		D662947B21A200890048A662 /* Date+Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Weekday.swift"; sourceTree = "<group>"; };
+		D662947D21A204F50048A662 /* Date+Hours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Hours.swift"; sourceTree = "<group>"; };
 		D66F177F219E060D0095232D /* CurrentForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecast.swift; sourceTree = "<group>"; };
 		D6775873217DDC2100B30A5D /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6775876217DDC2100B30A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +54,6 @@
 		D677589B217E019C00B30A5D /* WeekForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6E0C5102199E03600DBD822 /* TimedForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedForecastDataSource.swift; sourceTree = "<group>"; };
 		D6E0C5122199E64B00DBD822 /* WeekForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekForecastDataSource.swift; sourceTree = "<group>"; };
-		D6F7A6E5219D960700FB7C36 /* APIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIKeys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +111,6 @@
 				D6775876217DDC2100B30A5D /* AppDelegate.swift */,
 				D677587D217DDC2600B30A5D /* Assets.xcassets */,
 				D6775882217DDC2600B30A5D /* Info.plist */,
-				D6F7A6E5219D960700FB7C36 /* APIKeys.plist */,
 				D662947321A1D5DE0048A662 /* AppCoordinator.swift */,
 			);
 			path = Weather;
@@ -125,6 +130,8 @@
 			children = (
 				D608BC02219D659700E084FD /* Networking */,
 				D6FD97922198F76200BF85B2 /* Entities */,
+				D662947B21A200890048A662 /* Date+Weekday.swift */,
+				D662947D21A204F50048A662 /* Date+Hours.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -135,6 +142,8 @@
 				D6775891217DEBCE00B30A5D /* WeekdayForecast.swift */,
 				D6775893217DEBE800B30A5D /* TimedForecast.swift */,
 				D66F177F219E060D0095232D /* CurrentForecast.swift */,
+				D662947721A1D9B10048A662 /* Weekday.swift */,
+				D662947921A1DA180048A662 /* Forecast.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -230,7 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D677587E217DDC2600B30A5D /* Assets.xcassets in Resources */,
-				D6F7A6E6219D960700FB7C36 /* APIKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,17 +298,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D662947A21A1DA180048A662 /* Forecast.swift in Sources */,
+				D662947E21A204F50048A662 /* Date+Hours.swift in Sources */,
 				D677589A217E002F00B30A5D /* TimedForecastCollectionViewCell.swift in Sources */,
 				D6775894217DEBE800B30A5D /* TimedForecast.swift in Sources */,
 				D662947421A1D5DE0048A662 /* AppCoordinator.swift in Sources */,
 				D6775892217DEBCE00B30A5D /* WeekdayForecast.swift in Sources */,
 				D677588E217DDD4B00B30A5D /* WeatherViewContent.swift in Sources */,
+				D662947C21A200890048A662 /* Date+Weekday.swift in Sources */,
 				D6775890217DDEED00B30A5D /* WeatherPresenter.swift in Sources */,
 				D677589C217E019C00B30A5D /* WeekForecastCollectionViewCell.swift in Sources */,
 				D6E0C5112199E03600DBD822 /* TimedForecastDataSource.swift in Sources */,
 				D6E0C5132199E64B00DBD822 /* WeekForecastDataSource.swift in Sources */,
 				D662947621A1D6A40048A662 /* WeatherCoordinator.swift in Sources */,
 				D6775877217DDC2100B30A5D /* AppDelegate.swift in Sources */,
+				D662947821A1D9B10048A662 /* Weekday.swift in Sources */,
 				D677588C217DDD1A00B30A5D /* WeatherViewController.swift in Sources */,
 				D66F1780219E060D0095232D /* CurrentForecast.swift in Sources */,
 				D608BC04219D65AD00E084FD /* OpenWeatherService.swift in Sources */,

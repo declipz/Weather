@@ -14,25 +14,60 @@ protocol WeatherPresenter {
 
 class WeatherPresenterImplementation: WeatherPresenter {
     let view: WeatherView!
+    let service: OpenWeatherService!
+    private var calendar = Calendar.current
     
-    init(view: WeatherView) {
+    init(view: WeatherView, service: OpenWeatherService) {
         self.view = view
+        self.service = service
     }
     
     func viewDidLoad() {
-        let service = OpenWeatherService()
-        service.fetchCurrentForecast(city: "Minsk") { currentForecast in
-            if let currentForecast = currentForecast {
-                self.view.display(currentCity: currentForecast.city)
-                self.view.display(forecastStatus: currentForecast.status)
-                self.view.display(currentTemperature: currentForecast.temperature)
+        if let timeZone = TimeZone(secondsFromGMT: 0) {
+            calendar.timeZone = timeZone
+        }
+        let currentCity = "Minsk"
+        // Fetch current forecast
+        service.fetchForecast(city: currentCity) { fetchedForecastList in
+            if let forecast = fetchedForecastList.first {
+                let temperature = String(Int(forecast.temperature)) + "°"
+                let currentForecast = CurrentForecast(city: currentCity,
+                                                      temperature: temperature,
+                                                      status: forecast.status)
+                self.view.display(currentForecast: currentForecast)
             }
         }
-        service.fetchTimedForecast(city: "Minsk") { timedForecastList in
+        // Fetch timed forecast
+        service.fetchForecast(city: currentCity) { fetchedForecastList in
+            let forecastList = fetchedForecastList[1...8]
+
+            var timedForecastList = [TimedForecast]()
+            for forecast in forecastList {
+                let temperature = String(Int(forecast.temperature)) + "°"
+                let timedForecast = TimedForecast(time: String(forecast.date.hours) + ":00",
+                                                  temperature: temperature)
+                timedForecastList.append(timedForecast)
+            }
             self.view.display(timedForecast: timedForecastList)
         }
-        service.fetchWeekForecast(city: "Minsk") { weekForecastList in
-            self.view.display(weekForecast: weekForecastList)
+        // Fetch week forecast
+        service.fetchForecast(city: currentCity) { fetchedForecastList in
+            var forecastList = [Forecast]()
+            forecastList = fetchedForecastList.filter({ !self.calendar.isDateInToday($0.date) })
+            
+            var nightForecast = forecastList.filter({ $0.date.hours == 0 })
+            var middayForecast = forecastList.filter({ $0.date.hours == 12 })
+            
+            var weekdayList = [WeekdayForecast]()
+            for i in 0..<nightForecast.count {
+                let temperatureAtMidday = String(Int(middayForecast[i].temperature)) + "°"
+                let temperatureAtNight = String(Int(nightForecast[i].temperature)) + "°"
+                let weekday = WeekdayForecast(weekdayName: nightForecast[i].date.weekday.rawValue,
+                                              temperatureAtMidday: temperatureAtMidday,
+                                              temperatureAtNight: temperatureAtNight)
+                weekdayList.append(weekday)
+            }
+            self.view.display(weekForecast: weekdayList)
         }
     }
 }

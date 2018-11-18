@@ -7,24 +7,13 @@
 //
 
 import Foundation
-import ObjectMapper
 
-class WeekdayForecast: Mappable {
+class WeekdayForecast {
+    var weekdayName: String
+    var temperatureAtMidday: String
+    var temperatureAtNight: String
     
-    
-    var weekdayName: String?
-    var temperatureAtMidday: Int?
-    var temperatureAtNight: Int?
-    
-    required init?(map: Map) {
-        
-    }
-    
-    func mapping(map: Map) {
-        
-    }
-    
-    init?(on weekdayName: String?, temperatureAtMidday: Int?, temperatureAtNight: Int?) {
+    init(weekdayName: String, temperatureAtMidday: String, temperatureAtNight: String) {
         self.weekdayName = weekdayName
         self.temperatureAtMidday = temperatureAtMidday
         self.temperatureAtNight = temperatureAtNight
