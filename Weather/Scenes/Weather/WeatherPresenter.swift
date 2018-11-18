@@ -21,30 +21,18 @@ class WeatherPresenterImplementation: WeatherPresenter {
     
     func viewDidLoad() {
         let service = OpenWeatherService()
-        DispatchQueue.global(qos: .userInitiated).async {
-            service.fetchCurrentForecast(city: "Minsk") { currentForecast in
-                DispatchQueue.main.async {
-                    if let currentForecast = currentForecast {
-                        self.view.display(currentCity: currentForecast.city)
-                        self.view.display(forecastStatus: currentForecast.status)
-                        self.view.display(currentTemperature: currentForecast.temperature)
-                    }
-                }
+        service.fetchCurrentForecast(city: "Minsk") { currentForecast in
+            if let currentForecast = currentForecast {
+                self.view.display(currentCity: currentForecast.city)
+                self.view.display(forecastStatus: currentForecast.status)
+                self.view.display(currentTemperature: currentForecast.temperature)
             }
         }
-        DispatchQueue.global(qos: .userInitiated).async {
-            service.fetchTimedForecast(city: "Minsk") { timedForecastList in
-                DispatchQueue.main.async {
-                    self.view.display(timedForecast: timedForecastList)
-                }
-            }
+        service.fetchTimedForecast(city: "Minsk") { timedForecastList in
+            self.view.display(timedForecast: timedForecastList)
         }
-        DispatchQueue.global(qos: .userInitiated).async {
-            service.fetchWeekForecast(city: "Minsk") { weekForecastList in
-                DispatchQueue.main.async {
-                    self.view.display(weekForecast: weekForecastList)
-                }
-            }
+        service.fetchWeekForecast(city: "Minsk") { weekForecastList in
+            self.view.display(weekForecast: weekForecastList)
         }
     }
 }

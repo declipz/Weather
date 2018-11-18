@@ -43,7 +43,7 @@ private class FetchedForecast: Mappable {
 class OpenWeatherService {
     private let appid = "604fdceb4fa7aca4071f571bdc3027c7"
     
-    func fetchCurrentForecast(city: String, completion: @escaping (CurrentForecast?) -> ()) {
+    func fetchCurrentForecast(city: String, completion: @escaping (CurrentForecast?) -> Void) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -56,7 +56,7 @@ class OpenWeatherService {
         }
     }
     
-    func fetchTimedForecast(city: String, completion: @escaping ([TimedForecast]) -> ()) {
+    func fetchTimedForecast(city: String, completion: @escaping ([TimedForecast]) -> Void) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
@@ -77,7 +77,7 @@ class OpenWeatherService {
         }
     }
     
-    func fetchWeekForecast(city: String, completion: @escaping ([WeekdayForecast]) -> ()) {
+    func fetchWeekForecast(city: String, completion: @escaping ([WeekdayForecast]) -> Void) {
         Alamofire.request("https://api.openweathermap.org/data/2.5/forecast?q=\(city)&APPID=\(appid)&units=metric").validate().responseJSON { response in
             switch response.result {
             case .success:
