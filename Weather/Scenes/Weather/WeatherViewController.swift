@@ -8,16 +8,14 @@
 
 import UIKit
 
-protocol WeatherView {
-    func display(currentCity: String?)
-    func display(forecastStatus: String?)
-    func display(currentTemperature: Int?)
+protocol WeatherView: class {
+    func display(currentForecast: CurrentForecast)
     func display(weekForecast: [WeekdayForecast])
     func display(timedForecast: [TimedForecast])
 }
 
 final class WeatherViewController: UIViewController, WeatherView {
-    let weatherView = WeatherViewContent()
+    let weatherView = WeatherContentView()
     let timedForecastDataSource = TimedForecastDataSource()
     let weekForecastDataSource = WeekForecastDataSource()
     
@@ -26,30 +24,25 @@ final class WeatherViewController: UIViewController, WeatherView {
     }
     
     var presenter: WeatherPresenter!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view = weatherView
+    
+    override func loadView() {
+        view = weatherView
         weatherView.weekForecastView.delegate = self
         weatherView.weekForecastView.dataSource = weekForecastDataSource
         weatherView.timedForecastView.delegate = self
         weatherView.timedForecastView.dataSource = timedForecastDataSource
-        
-        presenter = WeatherPresenterImplementation(view: self)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         presenter.viewDidLoad()
+        
     }
     
-    func display(currentCity: String?) {
-        weatherView.cityLabel.text = currentCity
-    }
-    
-    func display(forecastStatus: String?) {
-        weatherView.forecastStatusLabel.text = forecastStatus
-    }
-    
-    func display(currentTemperature: Int?) {
-        guard let currentTemperature = currentTemperature else { return }
-        weatherView.currentTemperatureLabel.text = String(currentTemperature) + "°"
+    func display(currentForecast: CurrentForecast) {
+        weatherView.cityLabel.text = currentForecast.city
+        weatherView.currentTemperatureLabel.text = currentForecast.temperature
+        weatherView.forecastStatusLabel.text = currentForecast.status
     }
     
     func display(weekForecast: [WeekdayForecast]) {

@@ -9,11 +9,11 @@
 import Foundation
 
 class WeekdayForecast {
-    var weekdayName: String
-    var temperatureAtMidday: Int
-    var temperatureAtNight: Int
+    let weekdayName: String
+    let temperatureAtMidday: String
+    let temperatureAtNight: String
     
-    init(on weekdayName: String, temperatureAtMidday: Int, temperatureAtNight: Int) {
+    init(weekdayName: String, temperatureAtMidday: String, temperatureAtNight: String) {
         self.weekdayName = weekdayName
         self.temperatureAtMidday = temperatureAtMidday
         self.temperatureAtNight = temperatureAtNight
