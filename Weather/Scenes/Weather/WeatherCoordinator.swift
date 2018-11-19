@@ -9,22 +9,18 @@
 import UIKit
 
 class WeatherCoordinator: Coordinator {
-    private var presenter: WeatherPresenter!
-    private var view: WeatherView!
-    private var service: OpenWeatherService
     private var window: UIWindow
+    private var weatherViewController = WeatherViewController()
     
-    init(window: UIWindow, service: OpenWeatherService) {
+    init(window: UIWindow) {
         self.window = window
-        self.service = service
     }
     
     func start() {
-        let viewController = WeatherViewController()
-        view = viewController
-        presenter = WeatherPresenterImplementation(view: view, service: service)
-        viewController.presenter = presenter // Probably needs to be redone
-        window.rootViewController = viewController
+        let service = OpenWeatherServiceImplementation()
+        let presenter = WeatherPresenterImplementation(view: weatherViewController, service: service)
+        weatherViewController.presenter = presenter
+        window.rootViewController = weatherViewController
         window.makeKeyAndVisible()
     }
 }

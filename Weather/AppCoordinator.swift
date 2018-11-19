@@ -13,16 +13,14 @@ protocol Coordinator {
 }
 
 class AppCoordinator: Coordinator {
-    private let service: OpenWeatherService
     private let window: UIWindow
     
-    init(window: UIWindow, service: OpenWeatherService) {
+    init(window: UIWindow) {
         self.window = window
-        self.service = service
     }
     
     func start() {
-        let weatherCoordinator = WeatherCoordinator(window: window, service: service)
+        let weatherCoordinator = WeatherCoordinator(window: window)
         weatherCoordinator.start()
     }
 }

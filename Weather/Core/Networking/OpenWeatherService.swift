@@ -10,7 +10,11 @@ import Foundation
 import Alamofire
 import ObjectMapper
 
-class OpenWeatherService {
+protocol OpenWeatherService {
+    func fetchForecast(city: String, completion: @escaping ([Forecast]) -> Void)
+}
+
+class OpenWeatherServiceImplementation: OpenWeatherService {
     private let appid = "604fdceb4fa7aca4071f571bdc3027c7"
     
     func fetchForecast(city: String, completion: @escaping ([Forecast]) -> Void) {

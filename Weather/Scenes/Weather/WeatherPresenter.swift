@@ -13,7 +13,7 @@ protocol WeatherPresenter {
 }
 
 class WeatherPresenterImplementation: WeatherPresenter {
-    let view: WeatherView!
+    weak var view: WeatherView!
     let service: OpenWeatherService!
     private var calendar = Calendar.current
     
@@ -39,9 +39,11 @@ class WeatherPresenterImplementation: WeatherPresenter {
         }
         // Fetch timed forecast
         service.fetchForecast(city: currentCity) { fetchedForecastList in
+            // Passing first element due to it's CurrentForecast and
+            // there is no sense to duplicte it to TimedForecast
             let forecastList = fetchedForecastList[1...8]
 
-            var timedForecastList = [TimedForecast]()
+            var timedForecastList: [TimedForecast] = []
             for forecast in forecastList {
                 let temperature = String(Int(forecast.temperature)) + "°"
                 let timedForecast = TimedForecast(time: String(forecast.date.hours) + ":00",
@@ -52,13 +54,13 @@ class WeatherPresenterImplementation: WeatherPresenter {
         }
         // Fetch week forecast
         service.fetchForecast(city: currentCity) { fetchedForecastList in
-            var forecastList = [Forecast]()
+            var forecastList: [Forecast] = []
             forecastList = fetchedForecastList.filter({ !self.calendar.isDateInToday($0.date) })
             
             var nightForecast = forecastList.filter({ $0.date.hours == 0 })
             var middayForecast = forecastList.filter({ $0.date.hours == 12 })
             
-            var weekdayList = [WeekdayForecast]()
+            var weekdayList: [WeekdayForecast] = []
             for i in 0..<nightForecast.count {
                 let temperatureAtMidday = String(Int(middayForecast[i].temperature)) + "°"
                 let temperatureAtNight = String(Int(nightForecast[i].temperature)) + "°"

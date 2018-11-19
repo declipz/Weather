@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol WeatherView {
+protocol WeatherView: class {
     func display(currentForecast: CurrentForecast)
     func display(weekForecast: [WeekdayForecast])
     func display(timedForecast: [TimedForecast])
 }
 
 final class WeatherViewController: UIViewController, WeatherView {
-    let weatherView = WeatherViewContent()
+    let weatherView = WeatherContentView()
     let timedForecastDataSource = TimedForecastDataSource()
     let weekForecastDataSource = WeekForecastDataSource()
     
