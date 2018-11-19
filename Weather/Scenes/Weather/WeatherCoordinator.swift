@@ -10,7 +10,6 @@ import UIKit
 
 class WeatherCoordinator: Coordinator {
     private var window: UIWindow
-    private var weatherViewController = WeatherViewController()
     
     init(window: UIWindow) {
         self.window = window
@@ -18,6 +17,7 @@ class WeatherCoordinator: Coordinator {
     
     func start() {
         let service = OpenWeatherServiceImplementation()
+        let weatherViewController = WeatherViewController()
         let presenter = WeatherPresenterImplementation(view: weatherViewController, service: service)
         weatherViewController.presenter = presenter
         window.rootViewController = weatherViewController

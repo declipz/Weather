@@ -13,8 +13,8 @@ protocol WeatherPresenter {
 }
 
 class WeatherPresenterImplementation: WeatherPresenter {
-    weak var view: WeatherView!
-    let service: OpenWeatherService!
+    private weak var view: WeatherView!
+    private let service: OpenWeatherService
     private var calendar = Calendar.current
     
     init(view: WeatherView, service: OpenWeatherService) {
